@@ -1,0 +1,13 @@
+{
+  "name": "north-indian-travel-itinerary",
+  "version": "1.0.0",
+  "description": "The Ultimate North Indian Travel Book Web App",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve . -p 3000",
+    "start": "npx -y serve . -p 3000"
+  },
+  "keywords": ["travel", "itinerary", "north-india", "varanasi", "gaya", "ayodhya"],
+  "author": "",
+  "license": "ISC"
+}

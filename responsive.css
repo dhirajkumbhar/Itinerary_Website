@@ -1,0 +1,1781 @@
+/* ==========================================================================
+   responsive.css  —  loads AFTER style.css
+   Mobile-first fixes for the whole site: no sideways scrolling, no overlap,
+   comfortable tap targets, and the same look on phone / tablet / desktop.
+   Breakpoints:  ≤1200  small desktop   ≤992  tablet   ≤768  large phone
+                 ≤600   phone           ≤420  small phone
+   ========================================================================== */
+
+/* ---------- 0. Safety net (all sizes) ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  body {
+    overflow-x: clip;
+  }
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.rt-place-img-box img,
+.dest-tab-img,
+.hero-backdrop img {
+  height: 100%;
+}
+
+/* images that are meant to fill their box */
+
+table {
+  max-width: 100%;
+}
+
+.container,
+.main-content,
+.view-section,
+.glass-panel,
+.day-card,
+.train-card {
+  min-width: 0;
+}
+
+/* long Marathi / English words and station names wrap instead of pushing the page wide */
+.act-content,
+.day-main-title,
+.main-heading,
+.section-subtitle,
+.dest-place-name,
+.dest-place-info,
+.grid-box-val,
+.dtrain-station,
+.fare-class-name,
+.top-title span {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* touch: no grey flash, no double-tap zoom delay on controls */
+button,
+a,
+.nav-link,
+.day-card,
+.train-leg-btn,
+.dest-tab-btn,
+.btn-train-action,
+.day-view-btn,
+.day-close-btn,
+.dmy-cal-btn,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* keyboard users still see where they are */
+button:focus-visible,
+a:focus-visible,
+.day-card:focus-visible {
+  outline: 3px solid #fedc75;
+  outline-offset: 2px;
+}
+
+/* completed day tile = one big tap target (same action as the View button) */
+.day-card.day-done.day-blurred:not(.day-clone) {
+  cursor: pointer;
+}
+
+/* ---------- 1. Small desktop / laptop ≤1200 ---------- */
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .train-card-inner-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+}
+
+/* ---------- 2. Tablet ≤992 ---------- */
+@media (max-width: 992px) {
+  .section-padding {
+    padding: 44px 0;
+  }
+
+  .section-padding-bottom {
+    padding-bottom: 44px;
+  }
+
+  .top-bar {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .top-title {
+    font-size: 17px;
+    min-width: 0;
+  }
+
+  .top-title span {
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  /* day-wise: single column, completed tiles keep a compact, tappable size */
+  #view-day-wise .days-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  #view-day-wise .days-container>.day-card,
+  #view-day-wise .days-container>.day-card.day-clone {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  #view-day-wise .days-container>.day-card.day-done.day-blurred {
+    width: min(100%, 320px);
+    justify-self: center;
+  }
+
+  .train-card-inner-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- 3. Phone + small tablet ≤768 : SAME layout as tablet, scaled down ---------- */
+@media (max-width: 768px) {
+  .container {
+    padding-left: clamp(12px, 3.2vw, 20px);
+    padding-right: clamp(12px, 3.2vw, 20px);
+  }
+
+  .section-padding {
+    padding: clamp(28px, 6vw, 44px) 0;
+  }
+
+  .main-heading {
+    font-size: clamp(24px, 5.6vw, 32px);
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: clamp(13px, 2.8vw, 15px);
+  }
+
+  /* top bar: same single row as tablet (menu • title • date); it only wraps on real phones, see §4 */
+  .top-bar {
+    height: auto;
+    min-height: 60px;
+    padding: calc(8px + env(safe-area-inset-top, 0)) 14px 8px;
+    gap: 10px;
+  }
+
+  .top-title {
+    flex: 1 1 0;
+    margin: 0;
+    min-width: 0;
+    font-size: clamp(14px, 2.8vw, 17px);
+    gap: 8px;
+  }
+
+  .trip-date-picker {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 5px 8px 5px 12px;
+  }
+
+  .dmy {
+    min-width: 0;
+  }
+
+  /* calendar pop-up: centred on screen instead of hanging off the right edge */
+  .cal-pop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    width: min(92vw, 340px);
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translate(-50%, -48%) scale(0.96);
+    transform-origin: center;
+    z-index: 400;
+  }
+
+  .cal-pop.open {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* hero keeps its tablet look */
+  .hero-banner {
+    min-height: 0;
+  }
+
+  .hero-content {
+    padding: clamp(28px, 7vw, 44px) 16px;
+  }
+
+  /* tabs keep the tablet look (centred, wrapping pills), just touch-sized */
+  .train-leg-btn,
+  .dest-tab-btn {
+    min-height: 44px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* tables / timelines scroll INSIDE their own box, never the page */
+  .day-train-table-responsive,
+  .table-responsive,
+  .route-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  .day-train-table {
+    min-width: 520px;
+  }
+
+  .route-timeline {
+    padding-left: 14px;
+    padding-right: 14px;
+    scroll-padding: 14px;
+  }
+
+  /* train cards: 2-column info grid like tablet */
+  .train-grid-2x2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .train-actions-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn-train-action {
+    flex: 1 1 150px;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+  .header-badge-group {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .fare-card-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* forms: 2 columns like tablet */
+  .expense-horizontal-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .expense-horizontal-form .form-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .expense-horizontal-form input,
+  .expense-horizontal-form select,
+  .expense-horizontal-form button {
+    width: 100%;
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  /* 16px stops iOS zoom-on-focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  .dmy-in {
+    font-size: 16px;
+    min-height: 36px;
+  }
+
+  /* day cards: tablet proportions, fluid padding / type */
+  .day-card-header {
+    padding: clamp(10px, 2.6vw, 14px) clamp(12px, 3vw, 20px);
+  }
+
+  .day-body {
+    padding: clamp(12px, 3vw, 20px);
+  }
+
+  .day-main-title {
+    font-size: clamp(16px, 3.6vw, 20px);
+    line-height: 1.25;
+  }
+
+  .act-content {
+    font-size: clamp(13.5px, 2.6vw, 15px);
+    line-height: 1.55;
+  }
+
+  .day-tag,
+  .day-badge,
+  .t-badge {
+    font-size: 11.5px;
+    padding: 4px 10px;
+  }
+
+  .glass-panel {
+    padding: clamp(14px, 3.4vw, 22px);
+  }
+
+  /* completed tile: IDENTICAL size to the tablet tile (320 × 170, centred) */
+  #view-day-wise .days-container>.day-card.day-done.day-blurred {
+    width: min(100%, 320px);
+    justify-self: center;
+  }
+
+  #view-day-wise .day-card.day-done.day-blurred .day-view-btn {
+    min-height: 44px;
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+
+  .day-close-btn {
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .day-done-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #view-day-wise .days-container>.day-card.day-clone {
+    height: auto;
+    max-height: none;
+  }
+
+  .lock-overlay {
+    text-align: center;
+  }
+
+  .lock-overlay span {
+    line-height: 1.35;
+  }
+}
+
+/* ---------- 4. Real phones ≤600 : only what cannot fit the tablet layout is restacked ---------- */
+@media (max-width: 600px) {
+
+  /* top bar wraps: row 1 = menu + title, row 2 = full-width date picker */
+  .top-bar {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .trip-date-picker {
+    flex: 1 1 100%;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tdp-label {
+    flex-shrink: 0;
+  }
+
+  .dmy {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+  }
+
+
+  /* wide train / place rows wrap instead of squeezing */
+  .dest-place-item {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .dest-place-icon {
+    flex-shrink: 0;
+  }
+
+  .dest-city-left,
+  .city-complete-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .day-train-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tile-day-badge {
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+  }
+
+  #view-day-wise .days-container {
+    gap: 16px;
+  }
+}
+
+/* ---------- 5. Small phones ≤420 : same layout, just tighter ---------- */
+@media (max-width: 420px) {
+  .top-title {
+    font-size: 14px;
+  }
+
+  .top-title i {
+    display: none;
+  }
+
+  .tdp-text {
+    display: none;
+  }
+
+  /* keep only the calendar icon before the date */
+  .dmy-in {
+    width: 2.4em;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .dmy-year {
+    width: 3.6em;
+  }
+
+  .train-grid-2x2 {
+    gap: 8px;
+  }
+
+  /* stays 2 columns, like tablet */
+  .train-leg-btn,
+  .dest-tab-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .btn-train-action {
+    flex-basis: 100%;
+  }
+
+  .expense-horizontal-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* inputs need the width */
+  .fare-price-val {
+    font-size: 16px;
+  }
+}
+
+/* ---------- 6. Touch devices: no hover lift / sticky hover ---------- */
+@media (hover: none) {
+
+  .day-card:hover,
+  .train-card:hover,
+  .glass-panel:hover,
+  .nav-item:hover .nav-icon {
+    transform: none;
+  }
+
+  .day-card.day-done.day-blurred:active {
+    transform: scale(0.985);
+  }
+
+  .day-view-btn:active,
+  .day-close-btn:active,
+  .btn-train-action:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ---------- 7. Short landscape phones ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .top-bar {
+    position: static;
+  }
+
+  .sidebar {
+    overflow-y: auto;
+  }
+
+  .cal-pop {
+    max-height: 94vh;
+  }
+}
+
+/* ---------- 8. Large screens: keep line length sensible ---------- */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+/* ---------- 9. Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- 10. Print ---------- */
+@media print {
+
+  .sidebar,
+  .top-bar,
+  .sidebar-overlay,
+  .day-close-btn,
+  .day-view-btn {
+    display: none !important;
+  }
+
+  .main-content {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   11. NAVIGATION DRAWER — phone AND tablet (≤992px)
+   Fixes the open/close "blinking": the old rule `.sidebar.collapsed:hover`
+   (hover-expand for mouse) was stronger than `.sidebar.mobile-open`, so a
+   touch counted as hover and slid the drawer straight back out.
+   In drawer mode the sidebar now ignores :hover and `collapsed` completely;
+   only the `mobile-open` class opens it.
+   ========================================================================== */
+@media (max-width: 992px) {
+  .app-layout {
+    display: block;
+  }
+
+  .main-content {
+    width: 100% !important;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 12px;
+  }
+
+  /* closed (default) — every state, hover included, stays off-screen */
+  .sidebar,
+  .sidebar.collapsed,
+  .sidebar.collapsed:hover,
+  .sidebar:hover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: min(86vw, 320px) !important;
+    max-width: 100vw;
+    transform: translate3d(-105%, 0, 0);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.28s;
+    visibility: hidden;
+    /* not tabbable / tappable while closed */
+    will-change: transform;
+    z-index: 1000;
+    box-shadow: none;
+  }
+
+  /* open — wins over every hover / collapsed combination */
+  .sidebar.mobile-open,
+  .sidebar.collapsed.mobile-open,
+  .sidebar.collapsed.mobile-open:hover,
+  .sidebar.mobile-open:hover {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.45);
+  }
+
+  /* labels are always visible in the drawer (they used to depend on :hover) */
+  .sidebar.collapsed:not(:hover) .brand-title,
+  .sidebar.collapsed:not(:hover) .user-info,
+  .sidebar.collapsed:not(:hover) .nav-text,
+  .sidebar.collapsed:not(:hover) .mantra-text {
+    display: inline;
+    opacity: 1;
+    width: auto;
+    pointer-events: auto;
+  }
+
+  .sidebar-toggle-btn {
+    display: none;
+  }
+
+  /* the desktop collapse arrow has no meaning here */
+
+  /* dark backdrop: fades in, no blur (blur + transform is what made some phones flicker) */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.25s ease, visibility 0s;
+  }
+
+  /* page behind the drawer does not scroll while it is open */
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .sidebar-nav {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .nav-link {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sidebar,
+  .sidebar-overlay {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   12. DAY-WISE ROUTE DETAILS — card grid like the reference design (≤992px)
+   · 3 equal columns, 4:3 tiles (2 columns on narrow windows, 1 on very narrow)
+   · every tile is a size container: DAY badge, COMPLETED stamp and the
+     View Details button are sized in "cqw" (% of the tile width), so the design
+     stays IDENTICAL and in proportion at any width, never overflowing.
+   · today's card and an opened day stay full width.
+   ========================================================================== */
+@media (max-width: 992px) {
+  #view-day-wise .days-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 2.6vw, 28px);
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* cards that hold content = full row */
+  #view-day-wise .days-container>.day-card,
+  #view-day-wise .days-container>.day-card.day-clone {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  /* completed + locked = tile */
+  #view-day-wise .days-container>.day-card.day-done.day-blurred,
+  #view-day-wise .days-container>.day-card.date-locked {
+    grid-column: span 1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    justify-self: stretch;
+    container-type: inline-size;
+    border-radius: 20px;
+  }
+
+  /* ---- DAY 01 badge ---- */
+  #view-day-wise .days-container .tile-day-badge {
+    top: 7cqw;
+    left: 5.6cqw;
+    padding: 1.6cqw 4.4cqw;
+    gap: 1.4cqw;
+    font-size: 6.4cqw;
+    border-radius: 50px;
+  }
+
+  #view-day-wise .days-container .tile-day-badge span {
+    font-size: 4cqw;
+    letter-spacing: 0.4cqw;
+  }
+
+  /* ---- COMPLETED stamp ---- */
+  #view-day-wise .day-card.day-done.day-blurred .day-completed-stamp {
+    top: 32cqw;
+    padding: 1.1cqw 4.6cqw 0.7cqw;
+    border-width: 0.9cqw;
+    outline-width: 0.6cqw;
+    outline-offset: 1cqw;
+    font-size: 7.6cqw;
+    letter-spacing: 0.3cqw;
+    white-space: nowrap;
+  }
+
+  /* ---- View Details button ---- */
+  #view-day-wise .day-card.day-done.day-blurred .day-view-btn {
+    top: 54.5cqw;
+    min-height: 0;
+    padding: 3.7cqw 9.5cqw;
+    font-size: 4.9cqw;
+    gap: 2cqw;
+    white-space: nowrap;
+  }
+
+  #view-day-wise .day-card.day-done.day-blurred .day-view-btn i {
+    display: inline-block;
+  }
+
+  #view-day-wise .day-card.day-done.day-blurred .day-done-veil {
+    padding-top: 0;
+  }
+
+  /* ---- locked tile: same proportions ---- */
+  #view-day-wise .day-card.date-locked .lock-overlay {
+    padding: 22cqw 4cqw 4cqw;
+    gap: 3cqw;
+  }
+
+  #view-day-wise .day-card.date-locked .lock-overlay i {
+    width: 14cqw;
+    height: 14cqw;
+    font-size: 5.6cqw;
+    box-shadow: 0 1.6cqw 4cqw rgba(0, 0, 0, 0.4), 0 0 0 1.6cqw rgba(255, 255, 255, 0.1);
+  }
+
+  #view-day-wise .day-card.date-locked .lock-overlay span {
+    padding: 1cqw 3.4cqw;
+    font-size: 3.4cqw;
+    letter-spacing: 0.2cqw;
+  }
+}
+
+/* narrow windows (phones keep the 768px layout, so this is for small desktop windows) */
+@media (max-width: 600px) {
+  #view-day-wise .days-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 340px) {
+  #view-day-wise .days-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   13. NAVBAR (sidebar) — all text inside it is 22px
+   Labels may wrap onto two lines instead of being cut off by the sidebar width.
+   ========================================================================== */
+.sidebar .brand-title,
+.sidebar .nav-link,
+.sidebar .nav-text,
+.sidebar .user-info,
+.sidebar .mantra-text,
+.sidebar .sacred-mantra {
+  font-size: 22px;
+}
+
+.sidebar .nav-link {
+  line-height: 1.25;
+}
+
+.sidebar .nav-text {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.sidebar .brand-title {
+  line-height: 1.2;
+  white-space: normal;
+}
+
+/* ==========================================================================
+   14. HERO BANNER — centred layout from the reference screenshot (≤768px)
+   badge → one-line title → quote card → colourful 4-word pill.
+   Everything scales with the screen width, so nothing wraps awkwardly,
+   overflows or overlaps.
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: auto;
+    min-height: 0;
+    padding: clamp(48px, 9vw, 72px) clamp(12px, 3.2vw, 24px) clamp(56px, 9vw, 80px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-overlay-glow {
+    width: 90vw;
+    max-width: 600px;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  /* "Holy Pilgrimage Guide" badge */
+  .spiritual-badge {
+    padding: 6px clamp(14px, 3vw, 20px);
+    font-size: clamp(12px, 2.1vw, 15px);
+    gap: 8px;
+    margin-bottom: clamp(12px, 2.6vw, 20px);
+  }
+
+  /* title: always ONE line, size follows the width (≈28px at 768px) */
+  .hero-title {
+    font-size: clamp(11px, calc((100vw - 32px) / 26), 34px);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    max-width: 100%;
+    margin: 0 auto clamp(16px, 3.4vw, 26px);
+  }
+
+  /* Marathi quote card */
+  .quote-card-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto clamp(18px, 3.6vw, 30px);
+  }
+
+  .quote-card {
+    padding: clamp(26px, 5.6vw, 44px) clamp(16px, 4.6vw, 40px);
+    border-radius: clamp(16px, 3vw, 24px);
+  }
+
+  .quote-icon-left,
+  .quote-icon-right {
+    font-size: clamp(20px, 4.2vw, 34px);
+  }
+
+  .quote-icon-left {
+    top: clamp(10px, 2vw, 16px);
+    left: clamp(10px, 2vw, 16px);
+  }
+
+  .quote-icon-right {
+    bottom: clamp(10px, 2vw, 16px);
+    right: clamp(10px, 2vw, 16px);
+  }
+
+  .marathi-quote {
+    font-size: clamp(12px, 2.2vw, 17px);
+    line-height: clamp(30px, 6.4vw, 50px);
+    letter-spacing: 0.03em;
+    overflow-wrap: anywhere;
+  }
+
+  /* colourful pill: श्रद्धा • संस्कृती • समर्पण • शांती on a single row */
+  .banner-tagline-container {
+    width: 100%;
+  }
+
+  .tagline-pill {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    gap: clamp(8px, 2.2vw, 16px);
+    padding: clamp(10px, 2.2vw, 15px) clamp(16px, 4.6vw, 40px);
+  }
+
+  .tagline-item {
+    font-size: clamp(12px, 2.3vw, 18px);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .tagline-divider {
+    font-size: clamp(8px, 1.6vw, 12px);
+  }
+}
+
+/* very small windows: keep the same structure, just a little tighter */
+@media (max-width: 380px) {
+  .tagline-pill {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 7px;
+  }
+
+  .tagline-item {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ==========================================================================
+   15. TRIP START bar inside the hero banner (≤768px, Home page)
+   app.js moves #tripDatePicker under the colourful pill and adds .in-hero.
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-content .trip-date-picker {
+    display: flex;
+    flex: none;
+    width: fit-content;
+    max-width: 100%;
+    margin: clamp(18px, 3.6vw, 28px) auto 0;
+    padding: 6px 8px 6px clamp(12px, 2.6vw, 16px);
+    gap: clamp(6px, 1.6vw, 10px);
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(18, 20, 53, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-content .trip-date-picker .tdp-text {
+    display: inline;
+  }
+
+  .hero-content .trip-date-picker .tdp-label {
+    font-size: clamp(12px, 2.1vw, 14px);
+  }
+
+  .hero-content .trip-date-picker .dmy {
+    flex: 0 1 auto;
+    justify-content: center;
+  }
+
+  /* calendar opens ABOVE the bar, centred (backdrop-filter makes the bar the anchor for pop-ups) */
+  .trip-date-picker.in-hero .cal-pop {
+    position: absolute;
+    top: auto;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    right: auto;
+    width: min(92vw, 340px);
+    max-height: none;
+    transform: translate(-50%, 8px) scale(0.96);
+    transform-origin: bottom center;
+    z-index: 60;
+  }
+
+  .trip-date-picker.in-hero .cal-pop.open {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .trip-date-picker.in-hero .cal-pop::before {
+    display: none;
+  }
+}
+
+/* the same calendar fix when the bar is in the top bar at ≤768 (other pages): anchor it under the bar */
+@media (max-width: 768px) {
+  .top-bar .trip-date-picker .cal-pop {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: auto;
+    right: 0;
+    width: min(92vw, 340px);
+    max-height: none;
+    transform: translateY(-6px) scale(0.96);
+    transform-origin: top right;
+  }
+
+  .top-bar .trip-date-picker .cal-pop.open {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   16. ROUTE TIMELINE TABLE (Route Map Details) — ≤962px
+   Keeps the SAME 5-column table as the reference screenshot:
+   Sr.no | Route (photo + "Pune → Gaya") | Km | Average Time | Mode
+   Column widths, photo, text and pills scale with the screen width, so the
+   Km pill never touches the route text and nothing overflows.
+   ========================================================================== */
+@media (max-width: 962px) {
+  .rtable-wrap {
+    max-width: 100%;
+    border-radius: clamp(14px, 2.6vw, 18px);
+  }
+
+  /* ---- title header ---- */
+  .rtable-header {
+    flex-wrap: nowrap;
+    gap: clamp(10px, 2.4vw, 20px);
+    padding: clamp(16px, 3.2vw, 24px) clamp(14px, 3.4vw, 32px);
+  }
+
+  .rtable-title-group {
+    min-width: 0;
+    gap: clamp(10px, 2.2vw, 18px);
+  }
+
+  .rtable-header-img {
+    width: clamp(54px, 9vw, 72px);
+    height: clamp(54px, 9vw, 72px);
+    border-radius: 12px;
+  }
+
+  .rtable-title-text {
+    min-width: 0;
+  }
+
+  .rtable-hindi {
+    font-size: clamp(20px, 3.9vw, 28px);
+    letter-spacing: 0.5px;
+  }
+
+  .rtable-en {
+    font-size: clamp(10.5px, 1.75vw, 13px);
+  }
+
+  .rtable-tagline {
+    font-size: clamp(9px, 1.5vw, 11px);
+    letter-spacing: 0.14em;
+  }
+
+  /* orange pill: small label over the big distance */
+  .rtable-dist-badge {
+    gap: clamp(7px, 1.4vw, 10px);
+    padding: clamp(9px, 1.8vw, 12px) clamp(14px, 3vw, 22px);
+    font-size: clamp(11px, 1.75vw, 13px);
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .rtable-dist-badge i {
+    font-size: clamp(13px, 2.2vw, 16px);
+  }
+
+  .rtable-dist-badge strong {
+    font-size: clamp(15px, 2.5vw, 18px);
+  }
+
+  /* ---- column header + rows share ONE grid so the columns line up ---- */
+  .rtable-col-header,
+  .rtable-row {
+    grid-template-columns:
+      clamp(36px, 8vw, 60px)
+      /* Sr.no   */
+      minmax(0, 1fr)
+      /* Route   */
+      clamp(82px, 17vw, 128px)
+      /* Km      */
+      clamp(96px, 22vw, 156px)
+      /* Time    */
+      clamp(52px, 11vw, 92px);
+    /* Mode    */
+    gap: clamp(6px, 1.6vw, 16px);
+    align-items: center;
+  }
+
+  .rtable-col-header {
+    padding: clamp(12px, 2.2vw, 14px) clamp(8px, 2.4vw, 20px);
+    font-size: clamp(12px, 2vw, 15px);
+  }
+
+  .rtable-row {
+    padding: clamp(10px, 2vw, 16px) clamp(8px, 2.4vw, 20px);
+  }
+
+  .rtable-col-header>div {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .rtable-col-header .rtable-col-leg {
+    text-align: left;
+  }
+
+  /* Sr.no circle */
+  .rt-num {
+    width: clamp(30px, 5.4vw, 38px);
+    height: clamp(30px, 5.4vw, 38px);
+    font-size: clamp(13px, 2.2vw, 16px);
+    border-width: 2px;
+  }
+
+  /* Route: photo + two-line "From → To" */
+  .rtable-col-leg {
+    min-width: 0;
+    gap: clamp(8px, 1.8vw, 14px);
+  }
+
+  .rt-place-img-box {
+    width: clamp(62px, 12vw, 90px);
+  }
+
+  .rt-place-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 90 / 56;
+    border-radius: 9px;
+  }
+
+  .rt-place-label {
+    font-size: clamp(7.5px, 1.2vw, 9.5px);
+    padding: 3px 2px 2px;
+  }
+
+  .rt-leg-text {
+    min-width: 0;
+    font-size: clamp(12px, 2vw, 14px);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  /* Km pill */
+  .rtable-col-km {
+    min-width: 0;
+  }
+
+  .rt-km {
+    font-size: clamp(11px, 1.8vw, 13px);
+    padding: 4px clamp(8px, 1.6vw, 12px);
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  /* Time (clock + text; long text such as "9 तास 45 मिनिटे (रात्रीचा प्रवास)" wraps neatly) */
+  .rtable-col-time {
+    min-width: 0;
+  }
+
+  .rt-time {
+    font-size: clamp(11px, 1.8vw, 13px);
+    gap: 5px;
+    text-align: center;
+    line-height: 1.35;
+    max-width: 100%;
+  }
+
+  .rt-time i {
+    font-size: clamp(12px, 2vw, 15px);
+    flex-shrink: 0;
+  }
+
+  /* Mode */
+  .rtable-col-mode {
+    min-width: 0;
+  }
+
+  .rt-train-icon {
+    font-size: clamp(18px, 3.2vw, 22px);
+  }
+
+  .rtable-col-mode small {
+    font-size: clamp(10px, 1.6vw, 11px);
+  }
+
+  /* ---- footer + tagline ---- */
+  .rtable-footer {
+    gap: clamp(8px, 2vw, 16px);
+    padding: clamp(12px, 2.4vw, 16px) clamp(14px, 3.4vw, 28px);
+    font-size: clamp(12px, 2vw, 14px);
+  }
+
+  .rtable-footer-left {
+    min-width: 0;
+    gap: clamp(6px, 1.4vw, 10px);
+  }
+
+  .rtable-footer-right {
+    padding: clamp(7px, 1.4vw, 8px) clamp(14px, 2.8vw, 20px);
+    font-size: clamp(12px, 2vw, 15px);
+    flex-shrink: 0;
+  }
+
+  .rtable-footer-right strong {
+    font-size: clamp(14px, 2.2vw, 17px);
+  }
+
+  .rtable-tagline-bar {
+    padding: 12px clamp(14px, 3.4vw, 28px);
+    font-size: clamp(10px, 1.6vw, 12px);
+    letter-spacing: 0.12em;
+  }
+}
+
+/* narrow windows only (phones keep the 768px layout): the title header wraps instead of squeezing */
+@media (max-width: 480px) {
+  .rtable-header {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .rtable-title-group {
+    justify-content: center;
+  }
+
+  .rtable-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   17. TRAIN SCHEDULE DETAILS — layout from the reference screenshot (≤962px)
+   · title + "Train Journey Timeline" card across the full width
+   · a narrow column of leg tiles (Pune ↓ Gaya …) on the LEFT
+   · the selected train's card on the RIGHT, as ONE column:
+       badges → name → 2×2 info boxes → 2 buttons side by side → Fare Breakdown
+   Everything scales with the screen width — no sideways scroll, no overlap.
+   ========================================================================== */
+@media (max-width: 962px) {
+  #view-train-details>.container {
+    display: grid;
+    grid-template-columns: clamp(104px, 22vw, 160px) minmax(0, 1fr);
+    column-gap: clamp(10px, 2.4vw, 20px);
+    align-items: start;
+  }
+
+  #view-train-details>.container>* {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  #view-train-details>.container>.train-leg-tabs {
+    grid-column: 1;
+  }
+
+  #view-train-details>.container>.train-cards-grid {
+    grid-column: 2;
+  }
+
+  #view-train-details .main-heading {
+    font-size: clamp(24px, 5.2vw, 38px);
+  }
+
+
+  /* ---- left column of leg tiles ---- */
+  #view-train-details .train-leg-tabs {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: clamp(8px, 1.8vw, 12px);
+    margin: 0;
+    padding: clamp(8px, 1.8vw, 12px);
+    overflow: visible;
+    border-radius: 16px;
+  }
+
+  #view-train-details .train-leg-tabs .train-leg-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: clamp(11px, 2vw, 14px);
+  }
+
+  #view-train-details .train-leg-btn .leg-from,
+  #view-train-details .train-leg-btn .leg-to {
+    font-size: clamp(11px, 2vw, 14px);
+    line-height: 1.25;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  /* ---- selected train card: one column ---- */
+  #view-train-details .train-cards-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(12px, 2.4vw, 20px);
+  }
+
+  #view-train-details .train-card.glass-panel {
+    padding: clamp(12px, 3vw, 24px);
+    border-radius: clamp(14px, 2.6vw, 20px);
+  }
+
+  #view-train-details .train-card-inner-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(12px, 2.4vw, 20px);
+  }
+
+  #view-train-details .train-card-header-badges {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  #view-train-details .header-badge-group {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  #view-train-details .t-badge {
+    font-size: clamp(9.5px, 1.7vw, 12px);
+    padding: 4px clamp(8px, 1.6vw, 12px);
+  }
+
+  #view-train-details .train-main-title {
+    font-size: clamp(18px, 3.6vw, 26px);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  #view-train-details .train-grid-2x2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(8px, 2vw, 14px);
+  }
+
+  #view-train-details .train-grid-box {
+    padding: clamp(10px, 2.4vw, 18px);
+    min-width: 0;
+  }
+
+  #view-train-details .grid-box-label {
+    font-size: clamp(8.5px, 1.5vw, 11px);
+    letter-spacing: 0.05em;
+  }
+
+  #view-train-details .grid-box-time {
+    font-size: clamp(18px, 3.6vw, 26px);
+  }
+
+  #view-train-details .grid-box-val {
+    font-size: clamp(14px, 2.9vw, 22px);
+  }
+
+  #view-train-details .grid-box-sub {
+    font-size: clamp(10px, 1.7vw, 13px);
+    line-height: 1.4;
+  }
+
+  /* the two buttons: side by side, equal width */
+  #view-train-details .train-actions-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(8px, 1.8vw, 12px);
+    margin-left: 0;
+  }
+
+  #view-train-details .train-actions-row .btn-train-action {
+    width: 100%;
+    flex: none;
+    min-height: 44px;
+    justify-content: center;
+    font-size: clamp(11px, 2vw, 14px);
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Fare Breakdown */
+  #view-train-details .fare-card-item {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+}
+
+/* ==========================================================================
+   18. SACRED DESTINATIONS & ATTRACTIONS — layout from the reference (≤962px)
+   · title + "Train Journey Timeline" across the full width
+   · LEFT : narrow "Visited Places Tracker" card with the city tiles stacked
+   · RIGHT: the open city (header with photo / dates / Reset, then its
+            attractions one per row with their "Visited" tick)
+   Everything scales with the screen width — no sideways scroll, no overlap.
+   ========================================================================== */
+@media (max-width: 962px) {
+  #view-places-visited>.container {
+    display: grid;
+    grid-template-columns: clamp(150px, 31%, 250px) minmax(0, 1fr);
+    column-gap: clamp(10px, 2.4vw, 20px);
+    align-items: start;
+  }
+
+  #view-places-visited>.container>* {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  #view-places-visited>.container>.visited-progress-card {
+    grid-column: 1;
+  }
+
+  #view-places-visited>.container>.destinations-accordion {
+    grid-column: 2;
+  }
+
+  #view-places-visited .main-heading {
+    font-size: clamp(24px, 5.2vw, 38px);
+  }
+
+
+  /* ---- LEFT: Visited Places Tracker ---- */
+  #view-places-visited .visited-progress-card {
+    margin-bottom: 0;
+    padding: clamp(10px, 2.4vw, 18px) clamp(10px, 2.2vw, 16px);
+    border-radius: clamp(14px, 2.6vw, 22px);
+  }
+
+  #view-places-visited .visited-progress-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  #view-places-visited .visited-progress-title {
+    justify-content: center;
+    font-size: clamp(11px, 2vw, 14px);
+  }
+
+  #view-places-visited .visited-progress-counter {
+    font-size: clamp(9.5px, 1.7vw, 13px);
+    padding: 3px clamp(8px, 1.6vw, 12px);
+    white-space: nowrap;
+  }
+
+  /* city tiles: ONE per row */
+  #view-places-visited .visited-progress-card .city-tracker-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(8px, 1.8vw, 12px);
+    margin-top: clamp(12px, 2.4vw, 18px);
+  }
+
+  #view-places-visited .dest-tab-btn.city-tracker-card {
+    padding: clamp(10px, 2vw, 14px) clamp(8px, 1.8vw, 14px);
+    min-width: 0;
+  }
+
+  #view-places-visited .city-tracker-card .ctc-head {
+    gap: clamp(6px, 1.4vw, 10px);
+    padding-right: 22px;
+  }
+
+  #view-places-visited .city-tracker-card .city-tracker-thumb {
+    width: clamp(26px, 5vw, 36px);
+    height: clamp(26px, 5vw, 36px);
+    flex-shrink: 0;
+  }
+
+  #view-places-visited .city-tracker-card .city-tracker-name {
+    font-size: clamp(11px, 2vw, 15px);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  #view-places-visited .city-tracker-card .date-chip {
+    font-size: clamp(9px, 1.55vw, 12px);
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  #view-places-visited .city-tracker-card .city-tracker-count {
+    font-size: clamp(9.5px, 1.6vw, 12px);
+  }
+
+  #view-places-visited .city-tracker-card .leg-view-btn {
+    font-size: clamp(10px, 1.7vw, 13px);
+    min-height: 28px;
+  }
+
+  #view-places-visited .ctc-hint {
+    align-items: flex-start;
+    font-size: clamp(9.5px, 1.6vw, 12px);
+    line-height: 1.45;
+    margin-top: 14px;
+  }
+
+  #view-places-visited .ctc-hint i {
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ---- RIGHT: the open city ---- */
+  #view-places-visited .destinations-accordion {
+    min-width: 0;
+  }
+
+  #view-places-visited .dest-city-block {
+    margin-bottom: 0;
+    border-radius: clamp(14px, 2.6vw, 22px);
+  }
+
+  #view-places-visited .dest-city-header {
+    flex-wrap: wrap;
+    gap: clamp(8px, 1.8vw, 12px);
+    padding: clamp(10px, 2.4vw, 16px) clamp(10px, 2.6vw, 20px);
+  }
+
+  #view-places-visited .dest-city-left {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: clamp(8px, 1.8vw, 14px);
+  }
+
+  #view-places-visited .dest-city-thumb {
+    width: clamp(44px, 8vw, 64px);
+    height: clamp(44px, 8vw, 64px);
+    min-width: clamp(44px, 8vw, 64px);
+    max-width: clamp(44px, 8vw, 64px);
+    max-height: clamp(44px, 8vw, 64px);
+  }
+
+  #view-places-visited .dest-city-name {
+    font-size: clamp(15px, 3vw, 20px);
+    line-height: 1.2;
+    flex-wrap: wrap;
+  }
+
+  #view-places-visited .dest-city-sub {
+    font-size: clamp(10px, 1.8vw, 13px);
+  }
+
+  #view-places-visited .dest-city-left .date-chip {
+    font-size: clamp(9.5px, 1.7vw, 12px);
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  #view-places-visited .btn-clear-city {
+    min-height: 32px;
+    font-size: clamp(10px, 1.7vw, 12px);
+    padding: 5px clamp(8px, 1.6vw, 12px);
+  }
+
+  #view-places-visited .dest-city-body {
+    padding: clamp(10px, 2.4vw, 20px);
+  }
+
+  #view-places-visited .dest-place-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(8px, 1.8vw, 12px);
+  }
+
+  #view-places-visited .dest-place-item {
+    flex-wrap: nowrap;
+    gap: clamp(8px, 1.8vw, 12px);
+    padding: clamp(8px, 1.8vw, 12px) clamp(10px, 2vw, 16px);
+    min-width: 0;
+  }
+
+  #view-places-visited .dest-place-icon {
+    flex-shrink: 0;
+    font-size: clamp(13px, 2.4vw, 18px);
+  }
+
+  #view-places-visited .dest-place-info {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  #view-places-visited .dest-place-name {
+    font-size: clamp(11.5px, 2.2vw, 15px);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  #view-places-visited .dest-place-timing {
+    font-size: clamp(9.5px, 1.8vw, 12.5px);
+    line-height: 1.4;
+  }
+
+  #view-places-visited .visited-checkbox-wrap {
+    flex-shrink: 0;
+    gap: 5px;
+  }
+
+  #view-places-visited .visited-check-text {
+    font-size: clamp(9px, 1.6vw, 12px);
+  }
+}
+
+
+/* ==========================================================================
+   19. TRAIN JOURNEY TIMELINE — exact fit (≤962px)
+   · Onward panel on top, Return panel below, each exactly the card width
+   · NO horizontal scroll: every size is derived from the width of ONE stop
+     column (--col = panel width ÷ number of stops), so labels, dots, pills and
+     the train pin always fit their column at any screen width.
+   ========================================================================== */
+@media (max-width: 962px) {
+  .train-timeline.tj {
+    margin-bottom: clamp(16px, 3.4vw, 28px);
+    max-width: 100%;
+  }
+
+  .tj-top {
+    gap: 12px 18px;
+    margin-bottom: clamp(12px, 2.6vw, 18px);
+  }
+
+  .tj-brand {
+    gap: clamp(10px, 2.2vw, 16px);
+  }
+
+  .tj-brand-icon {
+    width: clamp(40px, 7vw, 52px);
+    height: clamp(40px, 7vw, 52px);
+    font-size: clamp(18px, 3.2vw, 24px);
+    border-radius: clamp(11px, 2vw, 14px);
+  }
+
+  .tj-title {
+    font-size: clamp(19px, 3.8vw, 28px);
+  }
+
+  .tj-sub {
+    font-size: clamp(12px, 2vw, 15px);
+  }
+
+  .tj-status {
+    padding: clamp(9px, 1.8vw, 11px) clamp(14px, 2.8vw, 22px);
+    gap: clamp(8px, 1.6vw, 12px);
+    font-size: clamp(11.5px, 1.9vw, 15px);
+    border-radius: 22px;
+  }
+
+  .tj-status>i {
+    font-size: clamp(16px, 2.8vw, 20px);
+  }
+
+  .tj-card {
+    flex-direction: column;
+    gap: clamp(12px, 2.6vw, 22px);
+    padding: clamp(10px, 2.4vw, 22px);
+    border-radius: clamp(14px, 3vw, 18px);
+  }
+
+  .tj-onward,
+  .tj-return {
+    flex: none;
+    width: 100%;
+  }
+
+  .tj-panel-head {
+    gap: clamp(10px, 2.2vw, 16px);
+    padding: clamp(12px, 2.4vw, 18px) clamp(12px, 2.8vw, 22px);
+  }
+
+  .tj-panel-icon {
+    width: clamp(36px, 6.4vw, 46px);
+    height: clamp(36px, 6.4vw, 46px);
+    font-size: clamp(15px, 2.8vw, 20px);
+  }
+
+  .tj-panel-head h4 {
+    font-size: clamp(15px, 2.8vw, 20px);
+  }
+
+  .tj-panel-head p {
+    font-size: clamp(11px, 1.9vw, 14px);
+  }
+
+  /* --- the rail: fits the panel exactly, nothing scrolls --- */
+  .tj-scroll {
+    padding: 4px 6px clamp(14px, 2.6vw, 22px);
+    overflow: hidden;
+  }
+
+  .tj-track {
+    --col: calc((100cqw - 12px) / var(--n));
+    /* width of one stop column */
+    --pin: clamp(28px, calc(var(--col) * 0.40), 48px);
+    --dot: clamp(14px, calc(var(--col) * 0.19), 26px);
+    min-width: 0;
+  }
+
+  .tj-rail {
+    height: clamp(5px, calc(var(--col) * 0.07), 8px);
+    top: calc(var(--dotY) - clamp(5px, calc(var(--col) * 0.07), 8px) / 2);
+  }
+
+  .tj-dot {
+    border-width: clamp(2px, calc(var(--col) * 0.032), 3px);
+  }
+
+  .tj-stop.current .tj-dot {
+    box-shadow: none;
+  }
+
+  .tj-stop {
+    padding: 0;
+  }
+
+  .tj-city {
+    margin-top: clamp(8px, calc(var(--col) * 0.11), 14px);
+    font-size: clamp(9px, calc(var(--col) * 0.165), 18px);
+  }
+
+  .tj-station {
+    margin-top: clamp(5px, calc(var(--col) * 0.07), 10px);
+    font-size: clamp(8px, calc(var(--col) * 0.125), 14px);
+    gap: 3px;
+  }
+
+  .tj-station i {
+    font-size: 0.9em;
+  }
+
+  .tj-date {
+    margin-top: clamp(5px, calc(var(--col) * 0.07), 10px);
+    font-size: clamp(8px, calc(var(--col) * 0.125), 14px);
+  }
+
+  .tj-time {
+    margin-top: clamp(6px, calc(var(--col) * 0.09), 12px);
+    padding: clamp(3px, calc(var(--col) * 0.05), 7px) clamp(4px, calc(var(--col) * 0.07), 12px);
+    font-size: clamp(8px, calc(var(--col) * 0.105), 14px);
+    border-radius: 8px;
+    white-space: normal;
+    /* wraps inside its column instead of overflowing */
+    line-height: 1.25;
+  }
+}

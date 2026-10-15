@@ -1,0 +1,3724 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta id="vp" name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script>
+    /* Phones keep the 768px TABLET layout: the page is laid out 768px wide and the
+       browser scales it down to fit the screen, so no phone/mobile CSS ever kicks in.
+       Tablets and desktops are untouched (device-width). */
+    (function () {
+      var TABLET_W = 768;
+      function setViewport() {
+        var vp = document.getElementById('vp');
+        if (!vp) return;
+        var shortSide = Math.min(screen.width, screen.height);
+        vp.setAttribute('content', shortSide < TABLET_W
+          ? 'width=' + TABLET_W + ', viewport-fit=cover'
+          : 'width=device-width, initial-scale=1.0, viewport-fit=cover');
+      }
+      setViewport();
+    })();
+  </script>
+  <title>The Ultimate North Indian Travel Book | उत्तर भारतीय आध्यात्मिक प्रवास</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Mukta:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Rozha+One&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- App Wrapper -->
+  <div class="app-layout">
+
+    <!-- Auto-Hide Left Sidebar Navigation -->
+    <aside class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-om brand-icon"></i>
+          <span class="brand-title">North India Book</span>
+        </div>
+        <button class="sidebar-toggle-btn" id="sidebarToggle" title="Toggle Navigation Menu">
+          <i class="fa-solid fa-angles-right toggle-icon"></i>
+        </button>
+      </div>
+
+      <!-- <div class="sidebar-user-badge">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <div class="user-info">
+          <span class="user-role">आध्यात्मिक यात्रा</span>
+          <span class="user-name">पुणे ते अयोध्या</span>
+        </div>
+      </div> -->
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active" data-view="home">
+            <a href="#home" class="nav-link">
+              <i class="fa-solid fa-house nav-icon"></i>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="route-map">
+            <a href="#route-map" class="nav-link">
+              <i class="fa-solid fa-route nav-icon"></i>
+              <span class="nav-text">Route Map Details</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="day-wise">
+            <a href="#day-wise" class="nav-link">
+              <i class="fa-solid fa-calendar-days nav-icon"></i>
+              <span class="nav-text">Day-by-Day Itinerary</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="train-details">
+            <a href="#train-details" class="nav-link">
+              <i class="fa-solid fa-train nav-icon"></i>
+              <span class="nav-text">Train Schedule Details</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="places-visited">
+            <a href="#places-visited" class="nav-link">
+              <i class="fa-solid fa-gopuram nav-icon"></i>
+              <span class="nav-text">Destinations List</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="hotel-details">
+            <a href="#hotel-details" class="nav-link">
+              <i class="fa-solid fa-hotel nav-icon"></i>
+              <span class="nav-text">Hotel Details</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="restaurant-details">
+            <a href="#restaurant-details" class="nav-link">
+              <i class="fa-solid fa-utensils nav-icon"></i>
+              <span class="nav-text">Restaurant Details</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="expense-tracker">
+            <a href="#expense-tracker" class="nav-link">
+              <i class="fa-solid fa-wallet nav-icon"></i>
+              <span class="nav-text">Expense Tracker</span>
+            </a>
+          </li>
+          <li class="nav-item" data-view="budget-summary">
+            <a href="#budget-summary" class="nav-link">
+              <i class="fa-solid fa-chart-pie nav-icon"></i>
+              <span class="nav-text">Budget Summary</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sacred-mantra">
+          <i class="fa-solid fa-hands-praying"></i>
+          <!-- <span class="mantra-text">जय श्री राम | हर हर महादेव</span> -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile drawer -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainContent">
+
+      <!-- Top Mobile / Floating Bar -->
+      <header class="top-bar">
+        <button class="mobile-nav-toggle" id="mobileNavToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="top-title">
+          <i class="fa-solid fa-om gold-icon"></i>
+          <span>The Ultimate North Indian Travel Book</span>
+        </div>
+
+        <!-- TRIP DATE SELECTOR: applies dates across the whole website -->
+        <div class="trip-date-picker" id="tripDatePicker">
+          <span class="tdp-label" title="तुमच्या प्रवासाची सुरुवातीची तारीख निवडा">
+            <i class="fa-regular fa-calendar-days"></i>
+            <span class="tdp-text">Trip Start</span>
+          </span>
+
+          <!-- dd / mm / yyyy : three separate inputs in one row -->
+          <div class="dmy" role="group" aria-label="Trip start date, day slash month slash year">
+            <input class="dmy-in" id="dmyDay" type="text" inputmode="numeric" maxlength="2" placeholder="dd"
+              aria-label="Day" autocomplete="off">
+            <span class="dmy-sep" aria-hidden="true">/</span>
+            <input class="dmy-in" id="dmyMonth" type="text" inputmode="numeric" maxlength="2" placeholder="mm"
+              aria-label="Month" autocomplete="off">
+            <span class="dmy-sep" aria-hidden="true">/</span>
+            <input class="dmy-in dmy-year" id="dmyYear" type="text" inputmode="numeric" maxlength="4" placeholder="yyyy"
+              aria-label="Year" autocomplete="off">
+            <button type="button" class="dmy-cal-btn" id="dmyCalBtn" aria-label="Open calendar" aria-haspopup="dialog"
+              aria-expanded="false">
+              <i class="fa-regular fa-calendar-check"></i>
+            </button>
+          </div>
+
+          <!-- the real date value lives here (ISO yyyy-mm-dd); the fields above stay in sync with it -->
+          <input type="date" id="tripStartDate" class="tdp-native" tabindex="-1" aria-hidden="true">
+          <span class="tdp-range" id="tripRange" hidden></span>
+          <button type="button" class="tdp-clear" id="tripDateClear" title="Clear date" hidden>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <div class="cal-pop" id="calPop" role="dialog" aria-label="Choose trip start date" hidden></div>
+        </div>
+      </header>
+
+      <!-- Notice shown after a trip date is chosen (train running-day check) -->
+      <div class="trip-date-notice" id="tripDateNotice" hidden></div>
+
+      <!-- VIEW 1: HOME LANDING PAGE -->
+      <section class="view-section active" id="view-home">
+
+        <!-- HERO BANNER IMAGE SECTION -->
+        <div class="hero-banner">
+          <div class="hero-backdrop"></div>
+          <div class="hero-overlay-glow"></div>
+
+          <div class="hero-content">
+            <div class="spiritual-badge">
+              <i class="fa-solid fa-sun"></i>
+              <span>Holy Pilgrimage Guide</span>
+            </div>
+
+            <h1 class="hero-title">The Ultimate North Indian Travel Book</h1>
+
+            <!-- Centered Quote Card -->
+            <div class="quote-card-wrapper">
+              <div class="quote-card glass-panel">
+                <i class="fa-solid fa-quote-left quote-icon-left"></i>
+                <p class="marathi-quote">
+                  <!-- काही प्रवास ठिकाणे बदलतात, तर काही मनाला नवी दिशा देतात. <br> 🙏 श्रद्धा अनुभवा, संस्कृती जपा आणि
+                  आशीर्वादासोबत मनःशांती मिळवा.🙏 <br> 🌸तुमच्या सुंदर आणि अर्थपूर्ण आध्यात्मिक प्रवासासाठी हार्दिक
+                  शुभेच्छा !🌸 -->
+                  काही प्रवास ठिकाणे बदलतात, तर काही मनाला नवी दिशा देतात. <br> श्रद्धा अनुभवा, संस्कृती जपा आणि
+                  आशीर्वादासोबत मनःशांती मिळवा. <br> तुमच्या सुंदर आणि अर्थपूर्ण आध्यात्मिक प्रवासासाठी हार्दिक
+                  शुभेच्छा !
+                </p>
+                <i class="fa-solid fa-quote-right quote-icon-right"></i>
+              </div>
+            </div>
+
+            <!-- Bottom Tagline -->
+            <div class="banner-tagline-container">
+              <div class="tagline-pill">
+                <span class="tagline-item">श्रद्धा</span>
+                <span class="tagline-divider">•</span>
+                <span class="tagline-item">संस्कृती</span>
+                <span class="tagline-divider">•</span>
+                <span class="tagline-item">समर्पण</span>
+                <span class="tagline-divider">•</span>
+                <span class="tagline-item">शांती</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLACES & DURATION SHOWCASE SECTION -->
+        <div class="container section-padding">
+          <div class="section-header center">
+            <span class="section-subtitle">Holy Destinations & Duration</span>
+            <h2 class="section-title">Holy Destinations & Duration Overview</h2>
+            <div class="title-underline"></div>
+          </div>
+
+          <div class="places-grid">
+
+            <!-- Card 1: Gaya -->
+            <div class="place-card glass-panel featured-card" data-city="gaya">
+              <div class="card-img-header">
+                <img src="./2_gaya.png" alt="Gaya Vishnupad Mandir" class="card-real-img" loading="lazy">
+              </div>
+              <div class="place-info">
+                <h3 class="place-name">Gaya</h3>
+                <div class="duration-badge highlight-duration">
+                  <i class="fa-solid fa-fire"></i>
+                  <span>Duration: <strong>2 days</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Rajgir -->
+            <div class="place-card glass-panel featured-card" data-city="rajgir">
+              <div class="card-img-header">
+                <img src="./3_Rajgir.png" alt="Rajgir Vishwa Shanti Stupa" class="card-real-img" loading="lazy">
+              </div>
+              <div class="place-info">
+                <h3 class="place-name">Rajgir</h3>
+                <div class="duration-badge highlight-duration">
+                  <i class="fa-solid fa-fire"></i>
+                  <span>Duration: <strong>2 days</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Varanasi -->
+            <div class="place-card glass-panel featured-card" data-city="varanasi">
+              <div class="card-img-header">
+                <img src="./4_Varanasi.png" alt="Varanasi Ganga Aarti Ghats" class="card-real-img" loading="lazy">
+              </div>
+              <div class="place-info">
+                <h3 class="place-name">Varanasi</h3>
+                <div class="duration-badge highlight-duration">
+                  <i class="fa-solid fa-fire"></i>
+                  <span>Duration: <strong>3 days</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Prayagraj -->
+            <div class="place-card glass-panel featured-card" data-city="prayagraj">
+              <div class="card-img-header">
+                <img src="./5_Prayagraj.png" alt="Prayagraj Triveni Sangam" class="card-real-img" loading="lazy">
+              </div>
+              <div class="place-info">
+                <h3 class="place-name">Prayagraj</h3>
+                <div class="duration-badge highlight-duration">
+                  <i class="fa-solid fa-fire"></i>
+                  <span>Duration: <strong>2 days</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Ayodhya -->
+            <div class="place-card glass-panel featured-card" data-city="ayodhya">
+              <div class="card-img-header">
+                <img src="./6_Ayodhya.png" alt="Ayodhya Ram Mandir" class="card-real-img" loading="lazy">
+              </div>
+              <div class="place-info">
+                <h3 class="place-name">Ayodhya</h3>
+                <div class="duration-badge highlight-duration">
+                  <i class="fa-solid fa-fire"></i>
+                  <span>Duration: <strong>2 days</strong></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- QUICK ITINERARY HIGHLIGHTS -->
+        <div class="container section-padding-bottom">
+          <div class="quick-overview-box glass-panel">
+            <div class="overview-grid">
+              <div class="overview-item">
+                <div class="overview-icon"><i class="fa-solid fa-route"></i></div>
+                <div class="overview-data">
+                  <h4>Total Distance</h4>
+                  <p>4036 km</p>
+                </div>
+              </div>
+              <div class="overview-item">
+                <div class="overview-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="overview-data">
+                  <h4>Total Duration</h4>
+                  <p>14 days Travel</p>
+                </div>
+              </div>
+              <div class="overview-item">
+                <div class="overview-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <div class="overview-data">
+                  <h4>Trip Dates</h4>
+                  <p id="homeTripDates">Select date in navbar</p>
+                </div>
+              </div>
+              <div class="overview-item">
+                <div class="overview-icon"><i class="fa-solid fa-torii-gate"></i></div>
+                <div class="overview-data">
+                  <h4>Holy Destinations</h4>
+                  <p>5 Major Holy Cities</p>
+                </div>
+              </div>
+            </div>
+            <div class="overview-cta">
+              <button class="btn-primary" onclick="switchView('route-map')">
+                <i class="fa-solid fa-map-location-dot"></i> View Complete Route Map
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- VIEW 2: ROUTE MAP DETAILS PAGE -->
+      <section class="view-section" id="view-route-map">
+        <div class="container section-padding">
+
+          <!-- ══════════════════════════════════════════
+               ROUTE TIMELINE TABLE  (matches _1_timeline.png)
+               ══════════════════════════════════════════ -->
+          <div class="rtable-wrap">
+
+            <!-- Header -->
+            <div class="rtable-header">
+              <div class="rtable-title-group">
+                <img src="./7_Vishnupad_Temple.png" alt="Temple" class="rtable-header-img">
+                <div class="rtable-title-text">
+                  <h1 class="rtable-hindi">पवित्र यात्रा मार्ग</h1>
+                  <p class="rtable-en">Route Timeline at a Glance</p>
+                  <p class="rtable-tagline">Explore &nbsp;•&nbsp; Seek &nbsp;•&nbsp; Experience</p>
+                </div>
+              </div>
+              <div class="rtable-dist-badge">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Total Distance<br> <center><strong>4,036 km</strong></center></span>
+              </div>
+            </div>
+
+            <!-- Column header row -->
+            <div class="rtable-col-header">
+              <div class="rtable-col-num">Sr.no</div>
+              <div class="rtable-col-leg">Route</div>
+              <div class="rtable-col-km">Km</div>
+              <div class="rtable-col-time">Average Time</div>
+              <div class="rtable-col-mode">Mode</div>
+            </div>
+
+            <!-- Row 1: Pune → Gaya -->
+            <div class="rtable-row">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">1</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./1_Pune.png" alt="Pune" class="rt-place-img">
+                  <span class="rt-place-label">PUNE</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Pune &nbsp; &rarr; &nbsp;Gaya</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 1,711 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 22-24 तास</span>
+              </div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 2: Gaya → Rajgir -->
+            <div class="rtable-row alt">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">2</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./2_gaya.png" alt="Gaya" class="rt-place-img">
+                  <span class="rt-place-label">GAYA</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Gaya &nbsp; &rarr; &nbsp;Rajgir</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 60 Km</span></div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 1.5 - 2
+                  तास</span></div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 3: Rajgir → Varanasi -->
+            <div class="rtable-row">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">3</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./3_Rajgir.png" alt="Rajgir" class="rt-place-img">
+                  <span class="rt-place-label">RAJGIR</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Rajgir &nbsp; &rarr; &nbsp;Varanasi</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 300 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 9 तास 45 मिनिटे
+                  (रात्रीचा प्रवास)</span>
+              </div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 4: Varanasi → Prayagraj -->
+            <div class="rtable-row alt">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">4</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./4_Varanasi.png" alt="Varanasi" class="rt-place-img">
+                  <span class="rt-place-label">VARANASI</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Varanasi &nbsp; &rarr; &nbsp;Prayagraj</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 170 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 3 - 3.5
+                  तास</span></div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 5: Prayagraj → Ayodhya -->
+            <div class="rtable-row">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">5</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./5_Prayagraj.png" alt="Prayagraj" class="rt-place-img">
+                  <span class="rt-place-label">PRAYAGRAJ</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Prayagraj &nbsp; &rarr; &nbsp;Ayodhya</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 165 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 3.5 - 4
+                  तास</span></div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 6: Ayodhya → Varanasi -->
+            <div class="rtable-row alt">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">6</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./6_Ayodhya.png" alt="Ayodhya" class="rt-place-img">
+                  <span class="rt-place-label">AYODHYA</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Ayodhya &nbsp; &rarr; &nbsp;Varanasi</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 220 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 4 - 4.5
+                  तास</span></div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Row 7: Banaras → Hadapsar -->
+            <div class="rtable-row">
+              <div class="rtable-col-num">
+                <div class="rt-num orange">7</div>
+              </div>
+              <div class="rtable-col-leg">
+                <div class="rt-place-img-box">
+                  <img src="./4_Varanasi.png" alt="Banaras" class="rt-place-img">
+                  <span class="rt-place-label">BANARAS</span>
+                </div>
+                <div class="rt-leg-text">
+                  <strong>Banaras &nbsp; &rarr; &nbsp;Hadapsar</strong>
+                </div>
+              </div>
+              <div class="rtable-col-km"><span class="rt-km"><i class="fa-solid fa-location-dot"></i> 1,410 Km</span>
+              </div>
+              <div class="rtable-col-time"><span class="rt-time"><i class="fa-regular fa-clock"></i> ~ 24-26 तास</span>
+              </div>
+              <div class="rtable-col-mode"><i class="fa-solid fa-train rt-train-icon"></i><br><small>रेल्वे</small>
+              </div>
+            </div>
+
+            <!-- Total footer bar -->
+            <div class="rtable-footer">
+              <div class="rtable-footer-left">
+                <i class="fa-solid fa-location-dot"></i>
+                एकूण प्रवास अंतर (Total Route Distance)
+              </div>
+              <div class="rtable-footer-right">
+                <i class="fa-solid fa-road"></i>
+                <strong>4,036 Km</strong>
+              </div>
+            </div>
+
+            <!-- Bottom tagline -->
+            <div class="rtable-tagline-bar">
+              ‖ &nbsp; यात्रा पवित्र, अनुभव अविस्मरणीय &nbsp; ‖
+            </div>
+
+          </div>
+          <!-- end rtable-wrap -->
+
+        </div>
+      </section>
+
+
+      <!-- VIEW 3: DAY-BY-DAY ITINERARY -->
+      <section class="view-section" id="view-day-wise">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">दिवसनिहाय संपूर्ण मार्गक्रमण</span>
+            <h1 class="main-heading">Day-Wise Route Details</h1>
+            <p class="sub-heading">Complete 14-Day Detailed Itinerary, Trains & Sightseeing Schedule</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <div class="days-container">
+
+            <!-- Day 1 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">01</span></span>
+                  <span class="day-weekday-pill">Friday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-train"></i> Train Departure</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Pune → Gaya <span
+                    class="day-subtitle-tag">(Journey Start)</span></h3>
+              </div>
+              <div class="day-body">
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-flag-checkered"></i></span>
+                      <div class="act-content"><strong>प्रवासाची सुरुवात :</strong> पुणे रेल्वे
+                        स्टेशनवरून प्रवासाची सुरुवात.</div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train-subway"></i>Train Schedule
+                  </div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Route</th>
+                          <th>Train No.</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Pune → Gaya</strong></td>
+                          <td><span class="dtrain-no">11427</span><span class="dtrain-name">Pune - Jasidih
+                              Weekly Express</span>
+                          </td>
+                          <td><span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 06:40
+                              AM</span><br><small class="dtrain-station">Pune Jn</small></td>
+                          <td><span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 09:40
+                              AM</span><br><small class="dtrain-station">Gaya Jn</small></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">02</span></span>
+                  <span class="day-weekday-pill">Saturday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-gopuram"></i> Gaya Arrival</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Gaya Part <span
+                    class="day-subtitle-tag"></span></h3>
+              </div>
+              <div class="day-body">
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                      <div class="act-content"><strong>Arrive Gaya Station:</strong> <span class="time-highlight">09:40
+                          AM</span> वाजता गया जंक्शन येथे आगमन</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                      <div class="act-content"><strong>Hotel:</strong> <span class="time-highlight">10:30
+                          AM</span> Hotel Check-In</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                      <div class="act-content"><strong>Rest</strong> <span class="time-highlight">11:00
+                          AM - 03:00 PM</span> Body Relaxation.</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-compass"></i></span>
+                      <div class="act-content"><strong>Sightseeing Plan:</strong>
+                        <span class="time-highlight">03:00 PM</span> नंतर विष्णुपद मंदिर दर्शन.(5am to 12pm - 2pm to
+                        11pm)
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">03</span></span>
+                  <span class="day-weekday-pill">Sunday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-tree-city"></i> Bodh Gaya Sightseeing</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Bodh Gaya Part
+                </h3>
+              </div>
+              <div class="day-body">
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Mahabodhi Temple & Bodhi Tree</strong> = ( 5am - 9pm)
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Buddha Gaint Statute </strong> = (5am - 12pm , 2pm
+                        - 5pm)</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Metta Buddharam Temple</strong> = (8am - 12pm ,
+                        2pm - 5pm)</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Royal Butan Temple</strong> = (5am - 12pm ,
+                        2pm - 5pm) </strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Wat Thai Buddhagaya </strong> = (8am - 6pm)</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>9 Gold Pillars</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>Palyul Namdroling Temple</strong>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">04</span></span>
+                  <span class="day-weekday-pill">Monday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-mountain-sun"></i> Rajgir Travel &amp; Nalanda
+                  Sightseeing</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Nalanda Sightseeing</h3>
+              </div>
+              <div class="day-body">
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Train Schedule</div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Route</th>
+                          <th>Train No.</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Gaya-Rajgir</strong></td>
+                          <td><span class="dtrain-no">63368</span><br><small class="dtrain-station">MEMU</small></td>
+                          <td><span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 07:40 AM</span></td>
+                          <td><span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 10:40 AM</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                      <div class="act-content"><strong>Arrive Gaya Station:</strong> <span class="time-highlight">10:40
+                          AM</span> वाजता राजगीर जंक्शन येथे आगमन</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                      <div class="act-content"><strong>Hotel:</strong> <span class="time-highlight">11:30
+                          AM</span> Hotel Check-In</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-compass"></i></span>
+                      <div class="act-content"><strong>Sightseeing Plan:</strong>
+                        <span class="time-highlight">01:00 PM</span> नंतर प्राचीन नालंदा विद्यापीठ भेट.
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="day-train-wrap" style="margin-top: 10px;">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Nalanda Vehicle Details.
+                  </div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Places</th>
+                          <th>Vehicle </th>
+                          <th>Ride type</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><span class="dtrain-time dep"><i class="fa-solid fa-location-dot"></i>Nalanda</span></td>
+                          <td><strong>E-riskshaw/Taxi</strong></td>
+                          <td><span class="dtrain-time arr"><i class="fas fa-taxi"></i> Round Trip</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="day-title-box" style=" padding-left: 0;">
+                  <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Nalanda Places List
+                  </h3>
+                  <div class="day-body">
+                    <div class="day-activities-wrap">
+                      <ul class="day-activity-list">
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>Nalanda University</strong> = (9am - 5pm)
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>Xuan Zang ( Hsuen Tsang ) Memorial</strong> = (8am - 5pm)
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>Wat Thai Nalanda Temple</strong> = (8am - 4pm)
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="day-card highlight-day">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">05</span></span>
+                  <span class="day-weekday-pill">Tuesday</span>
+                </div>
+                <span class="day-tag special"><i class="fa-solid fa-graduation-cap"></i> Rajgir Sightseeing &amp;
+                  Varanasi
+                  Train</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Rajgir Sightseeing</h3>
+              </div>
+              <div class="day-body">
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <div class="day-train-wrap">
+                      <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Rajgir Vehicle
+                        Details.
+
+                      </div>
+                      <div class="day-train-table-responsive">
+                        <table class="day-train-table">
+                          <thead>
+                            <tr>
+                              <th>Places</th>
+                              <th>Vehicle </th>
+                              <th>Ride type</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><span class="dtrain-time dep"><i class="fa-solid fa-location-dot"></i>Rajgir
+                                  City</span></td>
+                              <td><strong>E-riskshaw/Taxi</strong></td>
+                              <td><span class="dtrain-time arr"><i class="fas fa-taxi"></i> Round Trip</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="day-title-box" style=" padding-left: 0;">
+                      <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Rajgir Places List
+                      </h3>
+                      <div class="day-body">
+                        <div class="day-activities-wrap">
+                          <ul class="day-activity-list">
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>Vishawa Santi Stupa (Ropeway)</strong> = (9am - 5pm)
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong> Pandu Pokhar</strong> = (8am - 5pm)
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>Swarna Bhandar </strong> = (8am - 4pm)
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>Wildlife Safari </strong> = (9am - 1pm , 2pm - 5pm)
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>Ghora Katora Lake </strong> = (8am - 6pm)
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>Venu Van </strong> = (8am - 6pm)
+                              </div>
+                            </li>
+
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+
+
+                </div>
+
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-moon"></i> Night Train Details for
+                    Varanasi</div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table highlight-table">
+                      <thead>
+                        <tr>
+                          <th>Route</th>
+                          <th>Train No.</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Rajgir → Varanasi</strong></td>
+                          <td><span class="dtrain-no">15137</span><br><small class="dtrain-station">BudhPurima Express
+                            </small></td>
+                          <td><span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 09:30
+                              PM</span><br><small class="dtrain-station">Rajgir Jn</small></td>
+                          <td><span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 07:15
+                              AM</span><br><small class="dtrain-station">Banaras Jn</small></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 6 -->
+            <div class="day-card highlight-day">
+              <div class="day-card">
+                <div class="day-card-header">
+                  <div class="day-badge-group">
+                    <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">06</span></span>
+                    <span class="day-weekday-pill">Wednesday</span>
+                  </div>
+                  <span class="day-tag"><i class="fa-solid fa-dharmachakra"></i> Baanras Arrival & Sarnath Tour</span>
+                </div>
+                <div class="day-title-box">
+                  <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Sarnath Part</h3>
+                </div>
+                <div class="day-body">
+                  <div class="day-activities-wrap">
+                    <ul class="day-activity-list">
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-train-subway"></i></span>
+                        <div class="act-content"><span class="time-highlight">07:15 AM</span> <strong>Arrival Banaras
+                            Station</strong> (Train 15137) — बनारस जंक्शन येथे आगमन</div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-hotel"></i></span>
+                        <div class="act-content"><span class="time-highlight">08:00 AM</span> <strong>Hotel
+                            Check-In</strong>, fresh up &amp; breakfast</div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-compass"></i></span>
+                        <div class="act-content"><span class="time-highlight">10:00 AM</span> <strong>Sightseeing
+                            Plan:</strong> start for Sarnath by E-Rickshaw (Round Trip)</div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-hotel"></i></span>
+                        <div class="act-content"><span class="time-highlight">04:00 PM</span> Return to Varanasi hotel
+                          &amp; rest</div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="day-train-wrap" style="margin-top: 10px;">
+                    <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Saranth Vehicle Details
+                    </div>
+                    <div class="day-train-table-responsive">
+                      <table class="day-train-table">
+                        <thead>
+                          <tr>
+                            <th>Place</th>
+                            <th>Vehicle</th>
+                            <th>Ride Type</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><strong>Varanasi → Sarnath</strong></td>
+                            <td><span class="dtrain-no">E-Riskshaw/Taxi</span></td>
+                            <td><span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> Round-trip
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="day-title-box" style="padding-left: 0;">
+                      <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Saranth Places List
+                      </h3>
+                      <div class="day-body">
+                        <div class="day-activities-wrap">
+                          <ul class="day-activity-list">
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>1)</strong> =
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong> 2)</strong> =
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>3)</strong> =
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong> 3)</strong> =
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>4) </strong> =
+                              </div>
+                            </li>
+                            <li>
+                              <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                              <div class="act-content"><strong>5) </strong> =
+                              </div>
+                            </li>
+
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Day 7 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">07</span></span>
+                  <span class="day-weekday-pill">Thursday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-dharmachakra"></i> Varanasi Tour</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Varanasi Part </h3>
+              </div>
+
+              <div class="day-train-wrap">
+                <div class="day-title-box">
+                  <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-1 Varanasi Places
+                    List
+                  </h3>
+                  <div class="day-body">
+                    <div class="day-activities-wrap">
+                      <ul class="day-activity-list">
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>1)</strong> =
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong> 2)</strong> =
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>3)</strong> =
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong> 3)</strong> =
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>4) </strong> =
+                          </div>
+                        </li>
+                        <li>
+                          <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                          <div class="act-content"><strong>5) </strong> =
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 8 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">08</span></span>
+                  <span class="day-weekday-pill">Friday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-gopuram"></i> Varanasi Local &amp; Ghats</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Varanasi Part</h3>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-2 Varanasi Places List
+                </h3>
+                <div class="day-body">
+                  <div class="day-activities-wrap">
+                    <ul class="day-activity-list">
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>1)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 2)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>4) </strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>5) </strong> =
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Day 9 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">09</span></span>
+                  <span class="day-weekday-pill">Saturday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-water"></i> Prayagraj Travel</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Prayagraj Part</h3>
+              </div>
+              <div class="day-body">
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Varanasi → Prayagraj
+                    Train Details</div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Route</th>
+                          <th>Train</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Varanasi Jn → Prayagraj Rambag</strong></td>
+                          <td><span class="dtrain-no">65111</span><br><small class="dtrain-station">MEMU</small></td>
+                          <td><span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 06:40
+                              AM</span><br><small class="dtrain-station">Varanasi Jn</small></td>
+                          <td><span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 10:05
+                              AM</span><br><small class="dtrain-station">Prayagraj Rambag</small></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="day-title-box" style="padding-left: 0;">
+                    <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-1 Prayagraj
+                      Places
+                      List
+                    </h3>
+                    <div class="day-body">
+                      <div class="day-activities-wrap">
+                        <ul class="day-activity-list">
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong>1)</strong> =
+                            </div>
+                          </li>
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong> 2)</strong> =
+                            </div>
+                          </li>
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong>3)</strong> =
+                            </div>
+                          </li>
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong> 3)</strong> =
+                            </div>
+                          </li>
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong>4) </strong> =
+                            </div>
+                          </li>
+                          <li>
+                            <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                            <div class="act-content"><strong>5) </strong> =
+                            </div>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 10 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">10</span></span>
+                  <span class="day-weekday-pill">Sunday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-landmark"></i> Prayagraj Sightseeing</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Prayagraj Part</h3>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-2 Prayagraj Places
+                  List
+                </h3>
+                <div class="day-body">
+                  <div class="day-activities-wrap">
+                    <ul class="day-activity-list">
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>1)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 2)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>4) </strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>5) </strong> =
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 11 -->
+            <div class="day-card highlight-day">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">11</span></span>
+                  <span class="day-weekday-pill">Monday</span>
+                </div>
+                <span class="day-tag special"><i class="fa-solid fa-gopuram"></i> Ayodhya Travel</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Ayodhya Part</h3>
+              </div>
+              <div class="day-body">
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> Prayagraj → Ayodhya
+                    Train
+                    Options</div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Option</th>
+                          <th>Train</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>Option A<br><small class="dtrain-station">Prayagraj Sangam → Ayodhya
+                                Dham</small></strong></td>
+                          <td><span class="dtrain-no">14231</span><br><small class="dtrain-station">Manwar Sangam
+                              Express</small></td>
+                          <td><span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 04:40 AM</span>
+                            <br>
+                            <small class="dtrain-station">Prayagraj Sangam</small>
+                          </td>
+                          <td>
+                            <span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 09:18 AM</span>
+                            <br>
+                            <small class="dtrain-station">Ayodhya Dham</small>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Option B<br><small class="dtrain-station">Prayagraj → Ayodhya
+                                Cantt</small></strong></td>
+                          <td><span class="dtrain-no">22129</span><br><small class="dtrain-station">Tulsi
+                              Express</small><br> <span class="dtrain-no">22111</span><br><small
+                              class="dtrain-station">AYC Amrit Bharat</small></td>
+                          <td>
+                            <span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 09:00 AM</span>
+                            <br> <small class="dtrain-station">Prayagraj</small><br>
+                            <span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 06:35 AM</span>
+                            <br> <small class="dtrain-station">Prayagraj</small>
+                          </td>
+                          <td>
+                            <br>
+                            <span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 10:15 AM</span>
+                            <br><small class="dtrain-station">Ayodhya Cantt</small><br>
+                            <span class="dtrain-time dep"><i class="fa-solid fa-location-dot"></i> 12:15 PM</span>
+                            <br> <small class="dtrain-station">Ayodhya Cantt</small><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="day-title-box">
+                  <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-1 Ayodhya Places
+                    List
+                  </h3>
+                  <div class="day-activities-wrap">
+                    <ul class="day-activity-list">
+                      <li style="margin-top: 10px;">
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>1)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 2)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong> 3)</strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>4) </strong> =
+                        </div>
+                      </li>
+                      <li>
+                        <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                        <div class="act-content"><strong>5) </strong> =
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 12 -->
+            <div class="day-card highlight-day">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">12</span></span>
+                  <span class="day-weekday-pill">Tuesday</span>
+                </div>
+                <span class="day-tag special"><i class="fa-solid fa-sun"></i> Shree Ram Mandir</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Ayodhya Part </h3>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i>Day-2 Ayodhya Places
+                  List
+                </h3>
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li style="margin-top: 10px;">
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>1)</strong> =
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong> 2)</strong> =
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>3)</strong> =
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong> 3)</strong> =
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>4) </strong> =
+                      </div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-thumbtack"></i></span>
+                      <div class="act-content"><strong>5) </strong> =
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 13 -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">13</span></span>
+                  <span class="day-weekday-pill">बुधवार • Wednesday</span>
+                </div>
+                <span class="day-tag"><i class="fa-solid fa-plane-departure"></i> Return Journey</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Return Journey Part
+                  <span class="day-subtitle-tag">(Ayodhya → Varanasi → Pune)</span>
+                </h3>
+              </div>
+              <div class="day-body">
+                <div class="day-train-wrap">
+                  <div class="day-section-label train-label"><i class="fa-solid fa-train"></i> परतीचा रेल्वे प्रवास
+                    (Return Journey Trains)</div>
+                  <div class="day-train-table-responsive">
+                    <table class="day-train-table">
+                      <thead>
+                        <tr>
+                          <th>Connecting Train Route</th>
+                          <th>Train No.</th>
+                          <th>Departure</th>
+                          <th>Arrival</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong> Ayodhya → Varanasi</strong></td>
+                          <td><span class="dtrain-no">14214</span><span class="dtrain-name">BSB Intercity</span></td>
+                          <td>
+                            <span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 09:05 AM</span>
+                            <br>
+                            <small class="dtrain-station">Ayodhya Dham</small>
+                          </td>
+                          <td>
+                            <span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 01:35 PM</span>
+                            <br>
+                            <small class="dtrain-station">Varanasi</small>
+                          </td>
+                        </tr>
+                        <tr class="highlight-row">
+                          <td><strong> Banaras → Hadapsar</strong></td>
+                          <td><span class="dtrain-no">22589</span><span class="dtrain-name">Hadapsar Amrit Bharat
+                              Exprees</span>
+                          </td>
+                          <td>
+                            <span class="dtrain-time dep"><i class="fa-regular fa-clock"></i> 06:15 PM</span>
+                            <br>
+                            <small class="dtrain-station">Banaras</small>
+                          </td>
+                          <td>
+                            <span class="dtrain-time arr"><i class="fa-solid fa-location-dot"></i> 00:10 AM</span>
+                            <br>
+                            <small class="dtrain-station">Hadapsar</small>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 14 -->
+            <div class="day-card highlight-day">
+              <div class="day-card-header">
+                <div class="day-badge-group">
+                  <span class="day-badge"><span class="day-lbl">DAY</span> <span class="day-num-val">14</span></span>
+                  <span class="day-weekday-pill">गुरुवार • Thursday</span>
+                </div>
+                <span class="day-tag special"><i class="fa-solid fa-house-chimney"></i> Trip Completed 💯</span>
+              </div>
+              <div class="day-title-box">
+                <h3 class="day-main-title"><i class="fa-solid fa-location-dot title-pin"></i> Return Journey Part
+                  <span class="day-subtitle-tag">(Home Sweet Home)</span>
+                </h3>
+              </div>
+              <div class="day-body">
+                <div class="day-activities-wrap">
+                  <ul class="day-activity-list">
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-location-crosshairs"></i></span>
+                      <div class="act-content"><strong>Arrival Hadapsar (Pune):</strong> <span
+                          class="time-highlight">00:10 AM</span> (मध्यरात्री हडपसर स्टेशनवर गाडी आगमन).</div>
+                    </li>
+                    <li>
+                      <span class="act-bullet"><i class="fa-solid fa-heart" style="color:#EF4444;"></i></span>
+                      <div class="act-content"><strong>Reach Home:</strong> आनंदाने व आशीर्वादाने सुखरूप घरी आगमन.
+                        दिव्य
+                        उत्तर भारतीय आध्यात्मिक यात्रा यशस्वीरीत्या संपन्न! 💯</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: TRAIN SCHEDULE DETAILS -->
+      <section class="view-section" id="view-train-details">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <h1 class="main-heading">Train Schedule Details</h1>
+            <p class="sub-heading">7 Direct Trains with Route Maps, Timings &amp; Fare Details</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <!-- TRAIN LEG ROUTE OPTION BUTTONS -->
+          <div class="train-leg-tabs">
+            <button class="train-leg-btn active" data-train-leg="pune-gaya">
+              <span class="leg-num">01</span>
+              <span class="leg-from">Pune</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Gaya</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="gaya-rajgir">
+              <span class="leg-num">02</span>
+              <span class="leg-from">Gaya</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Rajgir</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="rajgir-varanasi">
+              <span class="leg-num">03</span>
+              <span class="leg-from">Rajgir</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Varanasi</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="banaras-prayagraj">
+              <span class="leg-num">04</span>
+              <span class="leg-from">Banaras</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Prayagraj Rambag</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="prayagraj-ayodhya">
+              <span class="leg-num">05</span>
+              <span class="leg-from">Prayagraj Sangam</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Ayodhya Dham</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="ayodhya-varanasi">
+              <span class="leg-num">06</span>
+              <span class="leg-from">Ayodhya Dham</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Varanasi</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-train-leg="banaras-hadapsar">
+              <span class="leg-num">07</span>
+              <span class="leg-from">Banaras</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Hadapsar</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+          </div>
+
+          <!-- TRAIN CARDS GRID -->
+          <div class="train-cards-grid">
+
+            <!-- Train 1: PUNE → GAYA -->
+            <div class="train-card glass-panel" data-train-leg="pune-gaya">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('1_Pune.png');"
+                  title="50% Shaniwar Wada, Pune">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('2_gaya.png');"
+                  title="50% Mahabodhi Temple, Gaya"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 11427</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-calendar-check"></i> Friday
+                        Only</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 27 hrs</span>
+                  </div>
+                  <h2 class="train-main-title">PUNE → JSME Express</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE (PUNE)</span>
+                      <div class="grid-box-time">06:40 AM</div>
+                      <span class="grid-box-sub">Pune Jn (PUNE) • Day 1</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (GAYA)</span>
+                      <div class="grid-box-time">09:40 AM</div>
+                      <span class="grid-box-sub">Gaya Jn (GAYA) • Day 2 (+1 Day)</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">1,630 km</div>
+                      <span class="grid-box-sub">Direct Rail Route</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">27h 00m Total</div>
+                      <span class="grid-box-sub">Superfast Express</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('Pune → JSME Express (11427):\nDeparture: Pune Jn (06:40 AM Fri)\nArrival: Gaya Jn (09:40 AM Sat)\nDistance: 1,630 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-bed fare-icon"></i>
+                        <span class="fare-class-name">Sleeper (SL)</span>
+                      </div>
+                      <span class="fare-price-val">₹740</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">3rd AC (3A)</span>
+                      </div>
+                      <span class="fare-price-val">₹1,905</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 2: GAYA → RAJGIR -->
+            <div class="train-card glass-panel" data-train-leg="gaya-rajgir">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('2_gaya.png');"
+                  title="50% Mahabodhi Temple, Gaya"></div>
+                <div class="bg-half bg-right" style="background-image: url('3_Rajgir.png');"
+                  title="50% Vishwa Shanti Stupa, Rajgir"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 53226</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-rotate"></i> Daily</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 3h 05m</span>
+                  </div>
+                  <h2 class="train-main-title">Gaya → BKP Passenger</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE (GAYA)</span>
+                      <div class="grid-box-time">07:45 AM</div>
+                      <span class="grid-box-sub">Gaya Jn (GAYA) • Day 4</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (RAJGIR)</span>
+                      <div class="grid-box-time">10:50 AM</div>
+                      <span class="grid-box-sub">Rajgir (RGD) • Day 4</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">105 km</div>
+                      <span class="grid-box-sub">Local Connection</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">3h 05m Total</div>
+                      <span class="grid-box-sub">Passenger Train</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('Gaya → BKP Passenger (53226):\nDeparture: Gaya Jn (07:45 AM)\nArrival: Rajgir (10:50 AM)\nDistance: 105 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-ticket fare-icon"></i>
+                        <span class="fare-class-name">General (GN)</span>
+                      </div>
+                      <span class="fare-price-val">₹50</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 3: RAJGIR → VARANASI -->
+            <div class="train-card glass-panel" data-train-leg="rajgir-varanasi">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('3_Rajgir.png');"
+                  title="50% Vishwa Shanti Stupa, Rajgir"></div>
+                <div class="bg-half bg-right" style="background-image: url('4_Varanasi.png');"
+                  title="50% Kashi Ghats, Varanasi"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 15137</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-rotate"></i> Daily</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 9h 45m</span>
+                  </div>
+                  <h2 class="train-main-title">BudhPurima Express</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE (RAJGIR)</span>
+                      <div class="grid-box-time">09:30 PM</div>
+                      <span class="grid-box-sub">Rajgir (RGD) • Day 5</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (VARANASI)</span>
+                      <div class="grid-box-time">07:15 AM</div>
+                      <span class="grid-box-sub">Banaras Jn (BSB) • Day 6 (+1 Day)</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">260 km</div>
+                      <span class="grid-box-sub">Direct Route</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">9h 45m Total</div>
+                      <span class="grid-box-sub">Overnight Express</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('BudhPurima Express (15137):\nDeparture: Rajgir Jn (09:30 PM)\nArrival: Banaras Jn (07:15 AM, next day)\nDistance: 260 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-bed fare-icon"></i>
+                        <span class="fare-class-name">Sleeper (SL)</span>
+                      </div>
+                      <span class="fare-price-val">₹150</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">3rd AC (3A)</span>
+                      </div>
+                      <span class="fare-price-val">₹505</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 4: BANARAS → PRAYAGRAJ RAMBAG -->
+            <div class="train-card glass-panel" data-train-leg="banaras-prayagraj">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('4_Varanasi.png');"
+                  title="50% Kashi Ghats, Banaras"></div>
+                <div class="bg-half bg-right" style="background-image: url('5_Prayagraj.png');"
+                  title="50% Triveni Sangam, Prayagraj"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 65111</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-rotate"></i> Daily</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 3h 25m</span>
+                  </div>
+                  <h2 class="train-main-title">Banaras → Prayagraj Passenger</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE
+                        (BANARAS)</span>
+                      <div class="grid-box-time">06:40 AM</div>
+                      <span class="grid-box-sub">Banaras (BSBS) • Day 7</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (PRAYAGRAJ)</span>
+                      <div class="grid-box-time">10:05 AM</div>
+                      <span class="grid-box-sub">Prayagraj Rambag (PRRB) • Day 7</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">120 km</div>
+                      <span class="grid-box-sub">Short Connection</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">3h 25m Total</div>
+                      <span class="grid-box-sub">Passenger / MEMU</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('Banaras → PRRB Passenger (65111):\nDeparture: Banaras (06:40 AM)\nArrival: Prayagraj Rambag (10:05 AM)\nDistance: 120 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-chair fare-icon"></i>
+                        <span class="fare-class-name">2S Seating</span>
+                      </div>
+                      <span class="fare-price-val">₹75</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Chair Car (CC)</span>
+                      </div>
+                      <span class="fare-price-val">₹260</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 5: PRAYAGRAJ SANGAM → AYODHYA DHAM -->
+            <div class="train-card glass-panel" data-train-leg="prayagraj-ayodhya">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('5_Prayagraj.png');"
+                  title="50% Triveni Sangam, Prayagraj"></div>
+                <div class="bg-half bg-right" style="background-image: url('6_Ayodhya.png');"
+                  title="50% Ram Mandir, Ayodhya"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 14231</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-calendar-check"></i> Mon, Tue, Wed,
+                        Fri, Sat</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 4h 05m</span>
+                  </div>
+                  <h2 class="train-main-title">Manwar Sangam Express</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE
+                        (PRAYAGRAJ)</span>
+                      <div class="grid-box-time">04:40 PM</div>
+                      <span class="grid-box-sub">Prayagraj Sangam (PYGS) • Day 7</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (AYODHYA)</span>
+                      <div class="grid-box-time">08:45 PM</div>
+                      <span class="grid-box-sub">Ayodhya Dham (AYC) • Day 7</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">160 km</div>
+                      <span class="grid-box-sub">Direct Connection</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">4h 05m Total</div>
+                      <span class="grid-box-sub">Express Train</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('Manwar Sangam Express (14231):\nDeparture: Prayagraj Sangam (04:40 PM)\nArrival: Ayodhya Dham (08:45 PM)\nDistance: 160 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-bed fare-icon"></i>
+                        <span class="fare-class-name">Sleeper (SL)</span>
+                      </div>
+                      <span class="fare-price-val">₹145</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">3rd AC (3A)</span>
+                      </div>
+                      <span class="fare-price-val">₹505</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 6: AYODHYA DHAM → VARANASI -->
+            <div class="train-card glass-panel" data-train-leg="ayodhya-varanasi">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('6_Ayodhya.png');"
+                  title="50% Ram Mandir, Ayodhya"></div>
+                <div class="bg-half bg-right" style="background-image: url('4_Varanasi.png');"
+                  title="50% Kashi Ghats, Varanasi"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 14214</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-rotate"></i> Daily</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 4h 30m</span>
+                  </div>
+                  <h2 class="train-main-title">BSB Intercity Express</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE
+                        (AYODHYA)</span>
+                      <div class="grid-box-time">09:05 AM</div>
+                      <span class="grid-box-sub">Ayodhya Dham (AYC) • Day 13</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (VARANASI)</span>
+                      <div class="grid-box-time">01:35 PM</div>
+                      <span class="grid-box-sub">Varanasi Jn (BSB) • Day 13</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">135 km</div>
+                      <span class="grid-box-sub">Intercity Route</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">4h 30m Total</div>
+                      <span class="grid-box-sub">Intercity Express</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('BSB Intercity Express (14214):\nDeparture: Ayodhya Dham (09:05 AM Wed)\nArrival: Varanasi Jn (01:35 PM Wed)\nDistance: 135 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-chair fare-icon"></i>
+                        <span class="fare-class-name">2S Seating</span>
+                      </div>
+                      <span class="fare-price-val">₹100</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Chair Car (CC)</span>
+                      </div>
+                      <span class="fare-price-val">₹345</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Train 7: BANARAS → HADAPSAR -->
+            <div class="train-card glass-panel" data-train-leg="banaras-hadapsar">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('4_Varanasi.png');"
+                  title="50% Kashi Ghats, Banaras"></div>
+                <div class="bg-half bg-right" style="background-image: url('1_Pune.png');"
+                  title="50% Shaniwar Wada, Hadapsar/Pune"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill">Train No. 22589</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-calendar-check"></i> Wednesday
+                        Only</span>
+                    </div>
+                    <span class="t-badge train-runtime-pill"><i class="fa-solid fa-clock"></i> Run Time : 17h 55m</span>
+                  </div>
+                  <h2 class="train-main-title">Hadapsar Amrit Bharat Express</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-departure"></i> DEPARTURE
+                        (BANARAS)</span>
+                      <div class="grid-box-time">06:15 PM</div>
+                      <span class="grid-box-sub">Banaras (BSBS) • Day 13</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-plane-arrival"></i> ARRIVAL (HADAPSAR)</span>
+                      <div class="grid-box-time">00:10 AM</div>
+                      <span class="grid-box-sub">Hadapsar (HDP) • Day 14 (+1 Day)</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-road"></i> DISTANCE COVERED</span>
+                      <div class="grid-box-val">1,460 km</div>
+                      <span class="grid-box-sub">Return Rail Route</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-train"></i> JOURNEY DURATION</span>
+                      <div class="grid-box-val">17h 55m Total</div>
+                      <span class="grid-box-sub">Amrit Bharat Express</span>
+                    </div>
+                  </div>
+                  <div class="train-actions-row">
+                    <button class="btn-train-action primary"
+                      onclick="alert('Hadapsar Amrit Bharat Express (22589):\nDeparture: Banaras (06:15 PM Wed)\nArrival: Hadapsar (00:10 AM Thu)\nDistance: 1,460 km')">
+                      <i class="fa-solid fa-clock"></i> View Timetable
+                    </button>
+                    <a href="https://www.irctc.co.in" target="_blank" class="btn-train-action secondary">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i> Book on IRCTC
+                    </a>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">IRCTC Rates</span>
+                  </div>
+                  <h3 class="fare-section-title">Fare Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-bed fare-icon"></i>
+                        <span class="fare-class-name">Sleeper (SL)</span>
+                      </div>
+                      <span class="fare-price-val">₹655</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">3rd AC (3A)</span>
+                      </div>
+                      <span class="fare-price-val">₹1,755</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">2nd AC (2A)</span>
+                      </div>
+                      <span class="fare-price-val">₹2,510</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Standard IRCTC Railway Rates
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- SUMMARY & CONNECTION ANALYSIS DASHBOARD -->
+
+      </section>
+
+      <!-- VIEW 5: SACRED DESTINATIONS & ATTRACTIONS -->
+      <section class="view-section" id="view-places-visited">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">दर्शनीय व धार्मिक स्थळे</span>
+            <h1 class="main-heading">Sacred Destinations &amp; Attractions</h1>
+            <p class="sub-heading">Explore Key Temples, Ghats &amp; Monuments Across 5 Cities</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <!-- VISITED PLACES TRACKER: ONE card = overall progress + every city
+               (itinerary dates, lock, completed badge, View button, tick) -->
+          <div class="visited-progress-card" id="visitedProgressCard">
+            <div class="visited-progress-header">
+              <div class="visited-progress-title">
+                <i class="fa-solid fa-square-check"></i>
+                <span>Visited Places Tracker</span>
+              </div>
+              <div class="visited-progress-counter" id="visitedCounterText">0 / 0 Visited (0%)</div>
+            </div>
+            <div class="visited-progress-bar-bg">
+              <div class="visited-progress-bar-fill" id="visitedProgressBarFill" style="width: 0%;"></div>
+            </div>
+
+            <div class="city-tracker-grid" id="cityTrackerGrid">
+              <button type="button" class="dest-tab-btn city-tracker-card active" data-city="gaya" data-city-card="gaya"
+                onclick="switchDestCity('gaya', this)">
+                <span class="ctc-head">
+                  <img src="./2_gaya.png" alt="Gaya" class="city-tracker-thumb">
+                  <span class="city-tracker-name">Gaya</span>
+                </span>
+                <span class="ctc-progress">
+                  <span class="city-tracker-count" id="count-gaya">0 / 8</span>
+                  <span class="city-tracker-bar-bg"><span class="city-tracker-bar-fill" id="bar-gaya"
+                      style="width: 0%;"></span></span>
+                </span>
+              </button>
+              <button type="button" class="dest-tab-btn city-tracker-card" data-city="rajgir" data-city-card="rajgir"
+                onclick="switchDestCity('rajgir', this)">
+                <span class="ctc-head">
+                  <img src="./3_Rajgir.png" alt="Rajgir & Nalanda" class="city-tracker-thumb">
+                  <span class="city-tracker-name">Rajgir &amp; Nalanda</span>
+                </span>
+                <span class="ctc-progress">
+                  <span class="city-tracker-count" id="count-rajgir">0 / 11</span>
+                  <span class="city-tracker-bar-bg"><span class="city-tracker-bar-fill" id="bar-rajgir"
+                      style="width: 0%;"></span></span>
+                </span>
+              </button>
+              <button type="button" class="dest-tab-btn city-tracker-card" data-city="varanasi"
+                data-city-card="varanasi" onclick="switchDestCity('varanasi', this)">
+                <span class="ctc-head">
+                  <img src="./4_Varanasi.png" alt="Varanasi" class="city-tracker-thumb">
+                  <span class="city-tracker-name">Varanasi</span>
+                </span>
+                <span class="ctc-progress">
+                  <span class="city-tracker-count" id="count-varanasi">0 / 5</span>
+                  <span class="city-tracker-bar-bg"><span class="city-tracker-bar-fill" id="bar-varanasi"
+                      style="width: 0%;"></span></span>
+                </span>
+              </button>
+              <button type="button" class="dest-tab-btn city-tracker-card" data-city="prayagraj"
+                data-city-card="prayagraj" onclick="switchDestCity('prayagraj', this)">
+                <span class="ctc-head">
+                  <img src="./5_Prayagraj.png" alt="Prayagraj" class="city-tracker-thumb">
+                  <span class="city-tracker-name">Prayagraj</span>
+                </span>
+                <span class="ctc-progress">
+                  <span class="city-tracker-count" id="count-prayagraj">0 / 3</span>
+                  <span class="city-tracker-bar-bg"><span class="city-tracker-bar-fill" id="bar-prayagraj"
+                      style="width: 0%;"></span></span>
+                </span>
+              </button>
+              <button type="button" class="dest-tab-btn city-tracker-card" data-city="ayodhya" data-city-card="ayodhya"
+                onclick="switchDestCity('ayodhya', this)">
+                <span class="ctc-head">
+                  <img src="./6_Ayodhya.png" alt="Ayodhya" class="city-tracker-thumb">
+                  <span class="city-tracker-name">Ayodhya</span>
+                </span>
+                <span class="ctc-progress">
+                  <span class="city-tracker-count" id="count-ayodhya">0 / 4</span>
+                  <span class="city-tracker-bar-bg"><span class="city-tracker-bar-fill" id="bar-ayodhya"
+                      style="width: 0%;"></span></span>
+                </span>
+              </button>
+            </div>
+            <p class="ctc-hint"><i class="fa-solid fa-circle-info"></i> Tap a city to see its attractions below. Cities
+              open
+              automatically as per your itinerary schedule.</p>
+
+            <div class="visited-all-complete-banner" id="visitedAllCompleteBanner" style="display: none;">
+              <i class="fa-solid fa-trophy complete-icon"></i>
+              <div>
+                <h3>🎉 You have visited all the places!</h3>
+                <p>Congratulations! You have completed your spiritual visit across all 5 sacred cities.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CITY DESTINATION BLOCKS -->
+          <div class="destinations-accordion">
+
+            <!-- ───────── GAYA ───────── -->
+            <div class="dest-city-block glass-panel" data-city="gaya">
+              <div class="dest-city-header" onclick="toggleDestCity(this)">
+                <div class="dest-city-left">
+                  <img src="./2_gaya.png" alt="Gaya" class="dest-city-thumb">
+                  <div>
+                    <h2 class="dest-city-name"><i class="fa-solid fa-gopuram"></i> Gaya</h2>
+                    <span class="dest-city-sub">बोधगया व विष्णुपद तीर्थक्षेत्र &middot; 8 Attractions</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down dest-toggle-icon"></i>
+              </div>
+              <div class="dest-city-body open">
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Vishnupad Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 12:00 PM &amp;
+                        2:00 PM &ndash; 11:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Mahabodhi Temple &amp; Bodhi Tree</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 9:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-person-praying"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Buddha Giant Statue</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 12:00 PM &amp;
+                        2:00 PM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-place-of-worship"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Metta Buddharam Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 8:00 AM &ndash; 12:00 PM &amp;
+                        2:00 PM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-torii-gate"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Royal Bhutan Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 12:00 PM &amp;
+                        2:00 PM &ndash; 6:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-yin-yang"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Wat Thai Buddhagaya</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 7:00 AM &ndash; 6:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-columns"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">9 Gold Pillars</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Timings may vary &mdash;
+                        check locally</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-om"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Palyul Namdroling Temple</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Timings may vary &mdash;
+                        check locally</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ───────── RAJGIR & NALANDA ───────── -->
+            <div class="dest-city-block glass-panel" data-city="rajgir">
+              <div class="dest-city-header" onclick="toggleDestCity(this)">
+                <div class="dest-city-left">
+                  <img src="./3_Rajgir.png" alt="Rajgir" class="dest-city-thumb">
+                  <div>
+                    <h2 class="dest-city-name"><i class="fa-solid fa-mountain-sun"></i> Rajgir &amp; Nalanda</h2>
+                    <span class="dest-city-sub">राजगीर व नालंदा तीर्थक्षेत्र &middot; 11 Attractions</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down dest-toggle-icon"></i>
+              </div>
+              <div class="dest-city-body open">
+                <div class="dest-subsection-label">
+                  <i class="fa-solid fa-location-dot"></i> Rajgir
+                </div>
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Pawapuri &amp; Nalanda (Day Excursion)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 12:00 PM &amp;
+                        2:00 PM &ndash; 11:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Vishwa Shanti Stupa (Ropeway)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 9:00 AM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-water"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Pandu Pokhar (Lake)</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Open throughout the
+                        day</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-vault"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Swarna Bhandar (Gold Treasury)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 9:00 AM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-bridge"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Glass Bridge</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Timings may vary &mdash;
+                        check locally</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-paw"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Wildlife Safari</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 6:00 AM &ndash; 2:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Ghora Katora Lake</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Open throughout the
+                        day</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-tree"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Venu Van (Bamboo Grove)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 6:00 AM &ndash; 6:00 PM</span>
+                    </div>
+                  </li>
+                </ul>
+                <div class="dest-subsection-label nalanda-label">
+                  <i class="fa-solid fa-location-dot"></i> Nalanda
+                </div>
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-university"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Nalanda University (Ancient Ruins)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 9:00 AM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-monument"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Xuan Zang (Hsuen Tsang) Memorial</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 8:00 AM &ndash; 5:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-torii-gate"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Wat Thai Nalanda Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 8:00 AM &ndash; 4:00 PM</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ───────── VARANASI ───────── -->
+            <div class="dest-city-block glass-panel" data-city="varanasi">
+              <div class="dest-city-header" onclick="toggleDestCity(this)">
+                <div class="dest-city-left">
+                  <img src="./4_Varanasi.png" alt="Varanasi" class="dest-city-thumb">
+                  <div>
+                    <h2 class="dest-city-name"><i class="fa-solid fa-fire"></i> Varanasi (Kashi)</h2>
+                    <span class="dest-city-sub">काशी विश्वनाथ व गंगा तट &middot; 3 Days</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down dest-toggle-icon"></i>
+              </div>
+              <div class="dest-city-body">
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-gopuram"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Kashi Vishwanath Jyotirlinga</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 3:00 AM &ndash; 11:00
+                        PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-water"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Dashashwamedh Ghat Ganga Aarti</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 6:30 PM &ndash; 7:30 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Sarnath (Dhamek Stupa &amp; Ashoka Pillar)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 9:00 AM &ndash; 5:30 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-ship"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">84 Ghats Boat Safari</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 7:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-place-of-worship"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Kaal Bhairav Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 10:00
+                        PM</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ───────── PRAYAGRAJ ───────── -->
+            <div class="dest-city-block glass-panel" data-city="prayagraj">
+              <div class="dest-city-header" onclick="toggleDestCity(this)">
+                <div class="dest-city-left">
+                  <img src="./5_Prayagraj.png" alt="Prayagraj" class="dest-city-thumb">
+                  <div>
+                    <h2 class="dest-city-name"><i class="fa-solid fa-water"></i> Prayagraj</h2>
+                    <span class="dest-city-sub">त्रिवेणी संगम &middot; 2 Days</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down dest-toggle-icon"></i>
+              </div>
+              <div class="dest-city-body">
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-water"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Triveni Sangam Snan</span>
+                      <span class="dest-place-timing"><i class="fa-solid fa-circle-info"></i> Open throughout the
+                        day</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Anand Bhavan &amp; Allahabad Fort</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 9:30 AM &ndash; 5:30 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-gopuram"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Lete Hue Hanuman Temple (Bade Hanuman)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 10:00
+                        PM</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ───────── AYODHYA ───────── -->
+            <div class="dest-city-block glass-panel" data-city="ayodhya">
+              <div class="dest-city-header" onclick="toggleDestCity(this)">
+                <div class="dest-city-left">
+                  <img src="./6_Ayodhya.png" alt="Ayodhya" class="dest-city-thumb">
+                  <div>
+                    <h2 class="dest-city-name"><i class="fa-solid fa-sun"></i> Ayodhya</h2>
+                    <span class="dest-city-sub">श्री राम जन्मभूमी &middot; 2 Days</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-down dest-toggle-icon"></i>
+              </div>
+              <div class="dest-city-body">
+                <ul class="dest-place-list">
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-gopuram"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Shree Ram Janmabhoomi Mandir</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 6:30 AM &ndash; 9:30 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-chess-rook"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Hanuman Garhi</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 5:00 AM &ndash; 10:00
+                        PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Kanak Bhavan Temple</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 8:00 AM &ndash; 12:00 PM &amp;
+                        4:00 PM &ndash; 9:00 PM</span>
+                    </div>
+                  </li>
+                  <li class="dest-place-item">
+                    <div class="dest-place-icon"><i class="fa-solid fa-water"></i></div>
+                    <div class="dest-place-info">
+                      <span class="dest-place-name">Saryu Nadi Aarti (Naya Ghat)</span>
+                      <span class="dest-place-timing"><i class="fa-regular fa-clock"></i> 6:30 PM &ndash; 7:30 PM</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /destinations-accordion -->
+        </div>
+      </section>
+
+      <!-- VIEW 6: HOTEL DETAILS -->
+      <section class="view-section" id="view-hotel-details">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">रहाण्याची उत्तम व्यवस्था</span>
+            <h1 class="main-heading">Hotel Details</h1>
+            <p class="sub-heading">Recommended Clean Stays Near Temples & Stations</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <!-- HOTEL CITY TAB BUTTONS -->
+          <div class="train-leg-tabs">
+            <button class="train-leg-btn active" data-hotel-city="gaya">
+              <span class="leg-num">01</span>
+              <span class="leg-from">Gaya</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">2 Nights</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-hotel-city="rajgir">
+              <span class="leg-num">02</span>
+              <span class="leg-from">Rajgir</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">1 Night</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-hotel-city="varanasi">
+              <span class="leg-num">03</span>
+              <span class="leg-from">Varanasi</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">6 Nights</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-hotel-city="prayagraj">
+              <span class="leg-num">04</span>
+              <span class="leg-from">Prayagraj</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">1 Night</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-hotel-city="ayodhya">
+              <span class="leg-num">05</span>
+              <span class="leg-from">Ayodhya</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">1 Night</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+          </div>
+
+          <!-- HOTEL CARDS GRID -->
+          <div class="train-cards-grid">
+
+            <!-- Hotel 1: GAYA -->
+            <div class="train-card glass-panel" data-hotel-city="gaya">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('2_gaya.png');"
+                  title="Gaya — Bodh Gaya & Vishnupad"></div>
+                <div class="bg-half bg-right" style="background-image: url('7_Vishnupad_Temple.png');"
+                  title="Vishnupad Temple, Gaya"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-hotel"></i> Gaya</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-moon"></i> 2 Nights Stay</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-gopuram"></i> Near Vishnupad Temple
+                        Road</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Budget – Mid
+                        Range</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <button class="btn-train-action primary"
+                        onclick="alert('Hotel Vishnu Vihar / Hotel Delta International\nLocation: Near Vishnupad Temple Road, Gaya\nRooms: AC Deluxe – Double/Twin\nAmenities: Free WiFi, Veg Restaurant, AC Rooms\nRate: ₹1,800 – ₹2,500 per night')">
+                        <i class="fa-solid fa-circle-info"></i> View Hotel Info
+                      </button>
+                      <button class="btn-train-action ticket-btn" onclick="openHotelTicketModal('gaya')">
+                        <i class="fa-solid fa-receipt"></i> Hotel Ticket
+                      </button>
+                      <a href="https://www.google.com/maps/search/Hotel+Vishnu+Vihar+Gaya" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <h2 class="train-main-title">Hotel Vishnu Vihar / Hotel Delta International</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-location-dot"></i> LOCATION</span>
+                      <div class="grid-box-val">Vishnupad Road</div>
+                      <span class="grid-box-sub">Gaya, Bihar</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bed"></i> ROOM TYPE</span>
+                      <div class="grid-box-val">AC Deluxe</div>
+                      <span class="grid-box-sub">Double / Twin Sharing</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-walking"></i> NEARBY</span>
+                      <div class="grid-box-val">5 Min Walk</div>
+                      <span class="grid-box-sub">to Vishnupad Temple</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-utensils"></i> DINING</span>
+                      <div class="grid-box-val">Veg Restaurant</div>
+                      <span class="grid-box-sub">Pure Sattvik Food</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">Per Night Rate</span>
+                  </div>
+                  <h3 class="fare-section-title">Price Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-wifi fare-icon"></i>
+                        <span class="fare-class-name">Free WiFi</span>
+                      </div>
+                      <span class="fare-price-val" style="color:#34D399; font-size:13px;">Included</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Room / Night</span>
+                      </div>
+                      <span class="fare-price-val">₹1,800–2,500</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-moon fare-icon"></i>
+                        <span class="fare-class-name">2 Nights Total Est.</span>
+                      </div>
+                      <span class="fare-price-val">≈ ₹5,000</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Rates vary by season & booking platform
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotel 2: RAJGIR -->
+            <div class="train-card glass-panel" data-hotel-city="rajgir" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('3_Rajgir.png');"
+                  title="Rajgir — Vishwa Shanti Stupa"></div>
+                <div class="bg-half bg-right" style="background-image: url('3_Rajgir.png');" title="Rajgir Hills"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-hotel"></i> Rajgir</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-moon"></i> 1 Night Stay</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-mountain"></i> Near Ropeway & Hot
+                        Springs</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Budget – Mid
+                        Range</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <button class="btn-train-action primary"
+                        onclick="alert('Hotel Nalanda Regency / Rajgir Residency\nLocation: Main Road, Rajgir, Bihar\nRooms: Standard & AC Double\nAmenities: Parking, Veg Dining, Near Ropeway\nRate: ₹1,200 – ₹2,000 per night')">
+                        <i class="fa-solid fa-circle-info"></i> View Hotel Info
+                      </button>
+                      <button class="btn-train-action ticket-btn" onclick="openHotelTicketModal('rajgir')">
+                        <i class="fa-solid fa-receipt"></i> Hotel Ticket
+                      </button>
+                      <a href="https://www.google.com/maps/search/Hotel+Rajgir+Residency" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <h2 class="train-main-title">Hotel Nalanda Regency / Rajgir Residency</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-location-dot"></i> LOCATION</span>
+                      <div class="grid-box-val">Main Road, Rajgir</div>
+                      <span class="grid-box-sub">Bihar</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bed"></i> ROOM TYPE</span>
+                      <div class="grid-box-val">Standard / AC</div>
+                      <span class="grid-box-sub">Double Occupancy</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-droplet"></i> HOT SPRINGS</span>
+                      <div class="grid-box-val">2 Km Away</div>
+                      <span class="grid-box-sub">Brahma Kund Hot Spring</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-utensils"></i> DINING</span>
+                      <div class="grid-box-val">In-house Dining</div>
+                      <span class="grid-box-sub">Veg Thali Available</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">Per Night Rate</span>
+                  </div>
+                  <h3 class="fare-section-title">Price Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-parking fare-icon"></i>
+                        <span class="fare-class-name">Free Parking</span>
+                      </div>
+                      <span class="fare-price-val" style="color:#34D399; font-size:13px;">Included</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Room / Night</span>
+                      </div>
+                      <span class="fare-price-val">₹1,200–2,000</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-moon fare-icon"></i>
+                        <span class="fare-class-name">1 Night Total Est.</span>
+                      </div>
+                      <span class="fare-price-val">≈ ₹1,600</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Rates vary by season & booking platform
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotel 3: VARANASI -->
+            <div class="train-card glass-panel" data-hotel-city="varanasi" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('4_Varanasi.png');" title="Varanasi Ghats">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('4_Varanasi.png');"
+                  title="Dashashwamedh Ghat">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-hotel"></i> Varanasi</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-moon"></i> 6 Nights Stay</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-fire"></i> Dashashwamedh Ghat
+                        Road</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Mid – Premium
+                        Range</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <button class="btn-train-action primary"
+                        onclick="alert('Hotel Kashi Residency / BrijRama Palace\nLocation: Dashashwamedh Ghat Road, Varanasi\nRooms: Deluxe AC, River View Available\nAmenities: Station Pickup, 5 min to Ghat & Aarti\nRate: ₹2,200 – ₹3,500 per night')">
+                        <i class="fa-solid fa-circle-info"></i> View Hotel Info
+                      </button>
+                      <button class="btn-train-action ticket-btn" onclick="openHotelTicketModal('varanasi')">
+                        <i class="fa-solid fa-receipt"></i> Hotel Ticket
+                      </button>
+                      <a href="https://www.google.com/maps/search/Hotel+Kashi+Residency+Varanasi" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <h2 class="train-main-title">Hotel Kashi Residency / BrijRama Palace</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-location-dot"></i> LOCATION</span>
+                      <div class="grid-box-val">Dashashwamedh Ghat</div>
+                      <span class="grid-box-sub">Varanasi, UP</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bed"></i> ROOM TYPE</span>
+                      <div class="grid-box-val">Deluxe AC</div>
+                      <span class="grid-box-sub">River View Available</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-person-walking"></i> NEARBY</span>
+                      <div class="grid-box-val">5 Min Walk</div>
+                      <span class="grid-box-sub">to Main Ghat & Aarti</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-car"></i> TRANSPORT</span>
+                      <div class="grid-box-val">Pickup Available</div>
+                      <span class="grid-box-sub">Station Pick-up</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">Per Night Rate</span>
+                  </div>
+                  <h3 class="fare-section-title">Price Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-car fare-icon"></i>
+                        <span class="fare-class-name">Station Pickup</span>
+                      </div>
+                      <span class="fare-price-val" style="color:#34D399; font-size:13px;">Included</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">Deluxe AC / Night</span>
+                      </div>
+                      <span class="fare-price-val">₹2,200–3,500</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-moon fare-icon"></i>
+                        <span class="fare-class-name">6 Nights Total Est.</span>
+                      </div>
+                      <span class="fare-price-val">≈ ₹16,800</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Rates vary by season & booking platform
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotel 4: PRAYAGRAJ -->
+            <div class="train-card glass-panel" data-hotel-city="prayagraj" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('5_Prayagraj.png');"
+                  title="Triveni Sangam, Prayagraj"></div>
+                <div class="bg-half bg-right" style="background-image: url('5_Prayagraj.png');" title="Prayagraj Ghats">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-hotel"></i> Prayagraj</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-moon"></i> 1 Night Stay</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-water"></i> Civil Lines / Near
+                        Sangam</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Budget – Mid
+                        Range</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <button class="btn-train-action primary"
+                        onclick="alert('Hotel Kanha Shyam / Sangam View Guest House\nLocation: Civil Lines / Near Sangam Ghat, Prayagraj\nRooms: Clean AC Double/Twin\nAmenities: Sangam View, Free Parking\nRate: ₹1,900 – ₹2,800 per night')">
+                        <i class="fa-solid fa-circle-info"></i> View Hotel Info
+                      </button>
+                      <button class="btn-train-action ticket-btn" onclick="openHotelTicketModal('prayagraj')">
+                        <i class="fa-solid fa-receipt"></i> Hotel Ticket
+                      </button>
+                      <a href="https://www.google.com/maps/search/Hotel+Kanha+Shyam+Prayagraj" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <h2 class="train-main-title">Hotel Kanha Shyam / Sangam View Guest House</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-location-dot"></i> LOCATION</span>
+                      <div class="grid-box-val">Civil Lines</div>
+                      <span class="grid-box-sub">Near Sangam Ghat, Prayagraj</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bed"></i> ROOM TYPE</span>
+                      <div class="grid-box-val">Clean AC Rooms</div>
+                      <span class="grid-box-sub">Double / Twin Sharing</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-water"></i> VIEW</span>
+                      <div class="grid-box-val">Sangam View</div>
+                      <span class="grid-box-sub">Triveni Confluence</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-parking"></i> PARKING</span>
+                      <div class="grid-box-val">Free Parking</div>
+                      <span class="grid-box-sub">Secure Compound</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">Per Night Rate</span>
+                  </div>
+                  <h3 class="fare-section-title">Price Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-parking fare-icon"></i>
+                        <span class="fare-class-name">Free Parking</span>
+                      </div>
+                      <span class="fare-price-val" style="color:#34D399; font-size:13px;">Included</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Room / Night</span>
+                      </div>
+                      <span class="fare-price-val">₹1,900–2,800</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-moon fare-icon"></i>
+                        <span class="fare-class-name">1 Night Total Est.</span>
+                      </div>
+                      <span class="fare-price-val">≈ ₹2,350</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Rates vary by season & booking platform
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotel 5: AYODHYA -->
+            <div class="train-card glass-panel" data-hotel-city="ayodhya" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('6_Ayodhya.png');"
+                  title="Ayodhya — Ram Mandir">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('6_Ayodhya.png');"
+                  title="Saryu River, Ayodhya">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-hotel"></i> Ayodhya</span>
+                      <span class="t-badge train-day-pill"><i class="fa-regular fa-moon"></i> 1 Night Stay</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-gopuram"></i> Ram Path, Near Ram
+                        Mandir</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Mid – Premium
+                        Range</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <button class="btn-train-action primary"
+                        onclick="alert('Ramayana Hotel / Hotel Shane Avadh\nLocation: Ram Path, Near Ram Mandir Gate, Ayodhya\nRooms: Modern AC Deluxe Double\nAmenities: Pure Veg Dining, Near Ram Mandir\nRate: ₹2,500 – ₹4,000 per night')">
+                        <i class="fa-solid fa-circle-info"></i> View Hotel Info
+                      </button>
+                      <button class="btn-train-action ticket-btn" onclick="openHotelTicketModal('ayodhya')">
+                        <i class="fa-solid fa-receipt"></i> Hotel Ticket
+                      </button>
+                      <a href="https://www.google.com/maps/search/Ramayana+Hotel+Ayodhya" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <h2 class="train-main-title">Ramayana Hotel / Hotel Shane Avadh</h2>
+                  <div class="train-title-divider"></div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-location-dot"></i> LOCATION</span>
+                      <div class="grid-box-val">Ram Path</div>
+                      <span class="grid-box-sub">Near Ram Mandir Gate</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bed"></i> ROOM TYPE</span>
+                      <div class="grid-box-val">Modern AC</div>
+                      <span class="grid-box-sub">Deluxe Double Room</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-gopuram"></i> NEARBY</span>
+                      <div class="grid-box-val">Walking Distance</div>
+                      <span class="grid-box-sub">to Ram Janmabhoomi</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bowl-food"></i> DINING</span>
+                      <div class="grid-box-val">Pure Veg</div>
+                      <span class="grid-box-sub">Sattvik Thali</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="train-right-panel">
+                  <div class="fare-header-row">
+                    <span class="t-badge fare-rate-tag">Per Night Rate</span>
+                  </div>
+                  <h3 class="fare-section-title">Price Breakdown</h3>
+                  <div class="fare-cards-list">
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-bowl-food fare-icon"></i>
+                        <span class="fare-class-name">Veg Dining</span>
+                      </div>
+                      <span class="fare-price-val" style="color:#34D399; font-size:13px;">Included</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-snowflake fare-icon"></i>
+                        <span class="fare-class-name">AC Deluxe / Night</span>
+                      </div>
+                      <span class="fare-price-val">₹2,500–4,000</span>
+                    </div>
+                    <div class="fare-card-item">
+                      <div class="fare-item-left">
+                        <i class="fa-solid fa-moon fare-icon"></i>
+                        <span class="fare-class-name">1 Night Total Est.</span>
+                      </div>
+                      <span class="fare-price-val">≈ ₹3,250</span>
+                    </div>
+                  </div>
+                  <div class="fare-footer-note">
+                    <i class="fa-solid fa-circle-info"></i> Rates vary by season & booking platform
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /train-cards-grid -->
+
+        </div>
+      </section>
+
+      <!-- VIEW 7: RESTAURANT DETAILS -->
+      <section class="view-section" id="view-restaurant-details">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">शुद्ध शाकाहारी उपाहारगृहे व खाद्यसंस्कृती</span>
+            <h1 class="main-heading">Restaurant Details</h1>
+            <p class="sub-heading">Famous Local Delicacies & Top Pure Veg Food Spots</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <!-- RESTAURANT CITY TAB BUTTONS -->
+          <div class="train-leg-tabs">
+            <button class="train-leg-btn active" data-rest-city="gaya">
+              <span class="leg-num">01</span>
+              <span class="leg-from">Gaya</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Litti &amp; Tilkut</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-rest-city="rajgir">
+              <span class="leg-num">02</span>
+              <span class="leg-from">Rajgir</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Silao Khaja</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-rest-city="varanasi">
+              <span class="leg-num">03</span>
+              <span class="leg-from">Varanasi</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Chat &amp; Sweets</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-rest-city="prayagraj">
+              <span class="leg-num">04</span>
+              <span class="leg-from">Prayagraj</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Rabdi Jalebi</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+            <button class="train-leg-btn" data-rest-city="ayodhya">
+              <span class="leg-num">05</span>
+              <span class="leg-from">Ayodhya</span>
+              <i class="fa-solid fa-arrow-down leg-arrow"></i>
+              <span class="leg-to">Ram Thali &amp; Peda</span>
+              <span class="leg-glow-dot"></span>
+            </button>
+          </div>
+
+          <!-- RESTAURANT CARDS GRID -->
+          <div class="train-cards-grid">
+
+            <!-- Restaurant 1: GAYA -->
+            <div class="train-card glass-panel" data-rest-city="gaya">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('2_gaya.png');" title="Gaya Food Culture">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('7_Vishnupad_Temple.png');"
+                  title="Gaya Dining">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-utensils"></i> Gaya</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-leaf"></i> 100% Pure Veg</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-fire"></i> Litti Chokha &amp;
+                        Tilkut</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-bowl-rice"></i> Sattvik
+                        Bhojan</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <a href="https://www.google.com/maps/search/Pramod+Laddu+Bhandar+Gaya" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-hotel"></i> HOTEL NAME</span>
+                      <div class="grid-box-val">Pramod Laddu Bhandar</div>
+                      <span class="grid-box-sub">Gaya Litti Corner &bull; Tower Chowk</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-clock"></i> TIMINGS</span>
+                      <div class="grid-box-val">07:00 AM &ndash; 10:30 PM</div>
+                      <span class="grid-box-sub">Open all 7 days for pilgrims</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bowl-food"></i> MUST-TRY SPECIALITY</span>
+                      <div class="grid-box-val">Litti Chokha &amp; Tilkut</div>
+                      <span class="grid-box-sub">Ghee Dipped Sattu Litti with Baingan Chokha</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Restaurant 2: RAJGIR -->
+            <div class="train-card glass-panel" data-rest-city="rajgir" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('3_Rajgir.png');" title="Rajgir Food Culture">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('3_Rajgir.png');" title="Silao Khaja"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-utensils"></i> Rajgir</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-award"></i> GI Tagged Delicacy</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-cookie-bite"></i> Silao Ka Khaja</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-mug-hot"></i> Sattu Sharbat</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <a href="https://www.google.com/maps/search/Silao+Khaja+Rajgir" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-hotel"></i> HOTEL NAME</span>
+                      <div class="grid-box-val">Silao Khaja Corner</div>
+                      <span class="grid-box-sub">Nalanda Green &bull; Kund Market</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-clock"></i> TIMINGS</span>
+                      <div class="grid-box-val">08:00 AM &ndash; 10:00 PM</div>
+                      <span class="grid-box-sub">Fresh batches made throughout the day</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-cookie-bite"></i> MUST-TRY SPECIALITY</span>
+                      <div class="grid-box-val">Silao Ka Khaja &amp; Kheer</div>
+                      <span class="grid-box-sub">Multi-layered crispy traditional sweet</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Restaurant 3: VARANASI -->
+            <div class="train-card glass-panel" data-rest-city="varanasi" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('4_Varanasi.png');"
+                  title="Varanasi Food Capital">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('4_Varanasi.png');" title="Kashi Chat"></div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-utensils"></i> Varanasi</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-fire"></i> World Famous Chaat</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-pepper-hot"></i> Tamatar Chaat &amp;
+                        Malaiyyo</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> Legendary Spots</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <a href="https://www.google.com/maps/search/Kashi+Chat+Bhandar+Varanasi" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-hotel"></i> HOTEL NAME</span>
+                      <div class="grid-box-val">Kashi Chat Bhandar</div>
+                      <span class="grid-box-sub">Deena Chat &bull; Godowlia Chowk</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-clock"></i> TIMINGS</span>
+                      <div class="grid-box-val">06:30 AM &ndash; 11:00 PM</div>
+                      <span class="grid-box-sub">Morning Kachori (6am) &amp; Evening Chaat (4pm)</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-pepper-hot"></i> MUST-TRY SPECIALITY</span>
+                      <div class="grid-box-val">Tamatar Chaat &amp; Malaiyyo</div>
+                      <span class="grid-box-sub">Hot Desi Ghee Tomato Chaat &amp; Saffron Milk Foam</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Restaurant 4: PRAYAGRAJ -->
+            <div class="train-card glass-panel" data-rest-city="prayagraj" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('5_Prayagraj.png');" title="Prayagraj Food">
+                </div>
+                <div class="bg-half bg-right" style="background-image: url('5_Prayagraj.png');" title="Netram Sweets">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-utensils"></i> Prayagraj</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-bowl-food"></i> Desi Ghee
+                        Kachori</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-spoon"></i> Rabdi Jalebi &amp;
+                        Chaat</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-star"></i> 100+ Year Legacy</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <a href="https://www.google.com/maps/search/Netram+Kachori+Prayagraj" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-hotel"></i> HOTEL NAME</span>
+                      <div class="grid-box-val">Netram Moolchand &amp; Sons</div>
+                      <span class="grid-box-sub">Loknath Chaat Galli &bull; Katra</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-clock"></i> TIMINGS</span>
+                      <div class="grid-box-val">07:00 AM &ndash; 10:30 PM</div>
+                      <span class="grid-box-sub">Morning Kachori breakfast is highly recommended</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-bread-slice"></i> MUST-TRY SPECIALITY</span>
+                      <div class="grid-box-val">Netram Kachori &amp; Rabdi</div>
+                      <span class="grid-box-sub">Desi Ghee Kachori with Dam Aloo &amp; thick Rabdi Jalebi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Restaurant 5: AYODHYA -->
+            <div class="train-card glass-panel" data-rest-city="ayodhya" style="display:none;">
+              <div class="train-card-bg-layer">
+                <div class="bg-half bg-left" style="background-image: url('6_Ayodhya.png');" title="Ayodhya Food"></div>
+                <div class="bg-half bg-right" style="background-image: url('6_Ayodhya.png');" title="Ayodhya Peda">
+                </div>
+                <div class="bg-overlay-shade"></div>
+              </div>
+              <div class="train-card-inner-layout">
+                <div class="train-left-panel">
+                  <div class="train-card-header-badges">
+                    <div class="header-badge-group">
+                      <span class="t-badge train-num-pill"><i class="fa-solid fa-utensils"></i> Ayodhya</span>
+                      <span class="t-badge train-day-pill"><i class="fa-solid fa-om"></i> Shri Ram Mahaprasad</span>
+                      <span class="t-badge landmark-pill"><i class="fa-solid fa-sun"></i> Ayodhya Peda &amp; Bedmi
+                        Puri</span>
+                      <span class="t-badge train-runtime-pill"><i class="fa-solid fa-leaf"></i> 100% Sattvik</span>
+                    </div>
+                    <div class="train-actions-row">
+                      <a href="https://www.google.com/maps/search/Makan+Malai+Ayodhya" target="_blank"
+                        class="btn-train-action secondary">
+                        <i class="fa-solid fa-map-location-dot"></i> View on Map
+                      </a>
+                    </div>
+                  </div>
+                  <div class="train-grid-2x2">
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-hotel"></i> HOTEL NAME</span>
+                      <div class="grid-box-val">Makan-Malai Restaurant</div>
+                      <span class="grid-box-sub">Shri Ram Bhojanalaya &bull; Ram Path</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-clock"></i> TIMINGS</span>
+                      <div class="grid-box-val">06:00 AM &ndash; 10:30 PM</div>
+                      <span class="grid-box-sub">Prasad &amp; Sattvik Thali available all day</span>
+                    </div>
+                    <div class="train-grid-box">
+                      <span class="grid-box-label"><i class="fa-solid fa-sun"></i> MUST-TRY SPECIALITY</span>
+                      <div class="grid-box-val">Ayodhya Peda &amp; Ram Thali</div>
+                      <span class="grid-box-sub">Sacred Mawa Peda &amp; Pure Ghee Bedmi Puri</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /train-cards-grid -->
+
+        </div>
+      </section>
+
+      <!-- VIEW 8: EXPENSE TRACKER -->
+      <section class="view-section" id="view-expense-tracker">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">प्रवास खर्च नोंदवही</span>
+            <h1 class="main-heading">Expense Tracker</h1>
+            <p class="sub-heading">Log Expenses, Track Categories & Control Your Budget</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <div class="tracker-vertical-layout">
+            <!-- Form Card (Horizontal at top) -->
+            <div class="tracker-form-card horizontal-form-card glass-panel">
+              <div class="form-card-header">
+                <h3><i class="fa-solid fa-plus-circle gold-icon"></i>Add New Expense</h3>
+                <span class="form-helper-text">Enter the expense details and save it.</span>
+              </div>
+              <form id="expenseForm" class="expense-horizontal-form">
+                <div class="form-group flex-2">
+                  <label for="expTitle"><i class="fa-solid fa-pen-to-square"></i> Expense Name</label>
+                  <input type="text" id="expTitle" placeholder="E.g., Train Ticket / Hotel / Food" required>
+                </div>
+
+                <div class="form-group flex-1">
+                  <label for="expAmount"><i class="fa-solid fa-indian-rupee-sign"></i> ₹ Amount</label>
+                  <input type="number" id="expAmount" placeholder="₹ 1500" min="1" required>
+                </div>
+
+                <div class="form-group flex-1">
+                  <label for="expCategory"><i class="fa-solid fa-layer-group"></i> Category</label>
+                  <select id="expCategory" required>
+                    <option value="">Choose Category</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Transport">Sightseeing</option>
+                    <option value="Stay">Stay</option>
+                    <option value="Food">Food</option>
+                    <option value="Puja">Temple</option>
+                    <option value="Misc">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group flex-1">
+                  <label for="expCity"><i class="fa-solid fa-location-dot"></i> शहर (City)</label>
+                  <select id="expCity">
+                    <option value="Gaya">Gaya</option>
+                    <option value="Rajgir">Rajgir</option>
+                    <option value="Varanasi">Varanasi</option>
+                    <option value="Prayagraj">Prayagraj</option>
+                    <option value="Ayodhya">Ayodhya</option>
+                    <option value="Return_Pune">Return Pune</option>
+                    <option value="Misc">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group flex-btn">
+                  <label class="btn-label-spacer">&nbsp;</label>
+                  <button type="submit" class="btn-primary add-expense-submit-btn">
+                    <i class="fa-solid fa-plus"></i> खर्च जोडा (Add)
+                  </button>
+                </div>
+                <!-- Extra options for the chosen category: shown in their own row under the fields -->
+                <div class="cat-extra-row" id="catExtraRow" hidden>
+                  <div class="form-group flex-1 cat-extra" id="extraStayAdults" hidden>
+                    <label for="expAdults"><i class="fa-solid fa-user"></i> Adults</label>
+                    <select id="expAdults">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                  <div class="form-group flex-1 cat-extra" id="extraStayChildren" hidden>
+                    <label for="expChildren"><i class="fa-solid fa-child"></i> Children</label>
+                    <select id="expChildren">
+                      <option value="0">None</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                  <div class="form-group flex-1 cat-extra" id="extraTransport" hidden>
+                    <label for="expTransportType"><i class="fa-solid fa-bus"></i> Transport Type</label>
+                    <select id="expTransportType">
+                      <option value="E-Rickshaw">E-Rickshaw</option>
+                      <option value="Bus">Bus</option>
+                      <option value="Taxi">Taxi</option>
+                      <option value="Train">Train</option>
+                    </select>
+                  </div>
+                  <div class="form-group flex-1 cat-extra" id="extraPuja" hidden>
+                    <label for="expPujaType"><i class="fa-solid fa-hands-praying"></i> Temple Expense</label>
+                    <select id="expPujaType">
+                      <option value="Puja Items">Puja Items</option>
+                      <option value="Darshan Ticket">Darshan Ticket</option>
+                    </select>
+                  </div>
+
+                </div>
+              </form>
+              <div class="cat-alloc-hint" id="catAllocHint" aria-live="polite"></div>
+            </div>
+
+            <!-- Logged Items List (Full Width Below Form) -->
+            <div class="tracker-list-card glass-panel">
+              <div class="list-header">
+                <div class="list-title-wrap">
+                  <h3><i class="fa-solid fa-city gold-icon"></i> शहरनिहाय खर्च (City-wise Expenses)</h3>
+                  <span class="list-subtext">सर्व शहरांचा तपशीलवार खर्च व बेरीज</span>
+                </div>
+                <div class="list-header-actions">
+                  <button type="button" class="btn-print-expenses" id="printCityExpensesBtn"
+                    title="Print City-wise Expenses">
+                    <i class="fa-solid fa-print"></i> प्रिंट खर्च (Print Expenses)
+                  </button>
+                  <span class="total-badge" id="totalExpenseDisplay">Total: ₹ 0</span>
+                </div>
+              </div>
+
+              <!-- City-wise Expense Columns -->
+              <div class="city-expense-columns" id="expenseList">
+                <!-- Dynamically Populated with City Columns -->
+              </div>
+
+              <!-- Overall Grand Total Card -->
+              <div class="grand-total-card" id="grandTotalCard">
+                <div class="grand-total-content">
+                  <div class="grand-total-info">
+                    <span class="grand-total-label"><i class="fa-solid fa-receipt gold-icon"></i> एकूण सर्व खर्च (Grand
+                      Total)</span>
+                    <span class="grand-total-sub" id="grandTotalCount">0 नोंदी (0 records)</span>
+                  </div>
+                  <div class="grand-total-val" id="grandTotalAmount">₹ 0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 9: BUDGET SUMMARY -->
+      <section class="view-section" id="view-budget-summary">
+        <div class="container section-padding">
+          <div class="section-header text-center">
+            <span class="section-subtitle">अंदाजित व वास्तव खर्च विश्लेषण</span>
+            <h1 class="main-heading">Budget Summary</h1>
+            <p class="sub-heading">Financial Overview & Estimated Trip Breakdown</p>
+            <div class="title-underline"></div>
+          </div>
+
+          <!-- Summary KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card glass-panel">
+              <i class="fa-solid fa-wallet kpi-icon green"></i>
+              <div class="kpi-info">
+                <span>अंदाजित बजेट (Est. Budget)</span>
+                <h2 id="kpiEstBudget">₹ 35,000</h2>
+              </div>
+            </div>
+            <div class="kpi-card glass-panel">
+              <i class="fa-solid fa-receipt kpi-icon orange"></i>
+              <div class="kpi-info">
+                <span>प्रत्यक्ष खर्च (Actual Spent)</span>
+                <h2 id="kpiActualSpent">₹ 0</h2>
+              </div>
+            </div>
+            <div class="kpi-card glass-panel">
+              <i class="fa-solid fa-piggy-bank kpi-icon blue"></i>
+              <div class="kpi-info">
+                <span>उर्वरित शिल्लक (Remaining)</span>
+                <h2 id="kpiRemaining">₹ 35,000</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Distribution Bars -->
+          <div class="budget-breakdown-card glass-panel margin-top-lg">
+            <h3><i class="fa-solid fa-chart-bar gold-icon"></i> श्रेणीनुसार अंदाजित खर्च वाटप (Category Allocation)</h3>
+
+            <div class="budget-edit-row">
+              <label for="budgetTotalInput"><i class="fa-solid fa-indian-rupee-sign"></i> एकूण बजेट (Total
+                Budget)</label>
+              <input type="number" id="budgetTotalInput" min="1000" step="500" inputmode="numeric">
+              <span class="budget-edit-note">Split automatically into the categories below. Each category keeps its own
+                amount.</span>
+            </div>
+
+            <div id="budgetCategoryList"><!-- Filled from the Expense Tracker data --></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="app-footer">
+        <div class="container footer-content">
+          <div class="footer-brand">
+            <i class="fa-solid fa-om brand-icon-sm"></i>
+            <span> जय विष्णुपद | नमो बुद्धाय | हर हर महादेव | हर हर गंगे | जय श्री राम</span>
+          </div>
+          <p class="footer-blessings">
+            "श्रद्धा - संस्कृती – समर्पण - शांती" | शुभ ते पंथानः सन्तु
+          </p>
+          <p class="copyright">
+            © 2026 spiritual Itinerary Guide • Designed with Reverence & Devotion
+          </p>
+        </div>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
