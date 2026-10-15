@@ -93,10 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Sidebar Manual Toggle
   sidebarToggle.addEventListener("click", (e) => {
     e.stopPropagation();
-    sidebar.classList.toggle("collapsed");
+    const nowCollapsed = sidebar.classList.toggle("collapsed");
+    // The mouse is still over the sidebar, so :hover would instantly re-expand it.
+    // Suppress hover-expand until the pointer leaves the sidebar.
+    sidebar.classList.toggle("no-hover", nowCollapsed);
+  });
+  sidebar.addEventListener("mouseleave", () => {
+    sidebar.classList.remove("no-hover");
   });
 
-  // Mobile / tablet nav drawer (<= 992px): one open/close pair, so it can never fight itself
+  // Mobile / tablet nav drawer (<= 962px): one open/close pair, so it can never fight itself
   let drawerOpenedAt = 0;
   function openDrawer() {
     drawerOpenedAt = Date.now();
@@ -127,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closeDrawer();
   });
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 992) closeDrawer();
+    if (window.innerWidth > 962) closeDrawer();
   });
 
   // Auto-hide feature when mouse leaves sidebar area or on scroll
@@ -135,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function triggerSidebarAutoHide() {
     clearTimeout(idleTimeout);
     idleTimeout = setTimeout(() => {
-      if (window.innerWidth > 992) {
+      if (window.innerWidth > 962) {
         sidebar.classList.add("collapsed");
       }
     }, 4000); // Collapse after 4s idle
