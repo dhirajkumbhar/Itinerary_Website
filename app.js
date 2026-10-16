@@ -137,17 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Auto-hide feature when mouse leaves sidebar area or on scroll
-  let idleTimeout;
-  function triggerSidebarAutoHide() {
-    clearTimeout(idleTimeout);
-    idleTimeout = setTimeout(() => {
-      if (window.innerWidth > 962) {
-        sidebar.classList.add("collapsed");
-      }
-    }, 4000); // Collapse after 4s idle
-  }
+  // let idleTimeout;
+  // function triggerSidebarAutoHide() {
+  //   clearTimeout(idleTimeout);
+  //   idleTimeout = setTimeout(() => {
+  //     if (window.innerWidth > 962) {
+  //       sidebar.classList.add("collapsed");
+  //     }
+  //   }, 4000); // Collapse after 4s idle
+  // }
 
-  sidebar.addEventListener("mouseleave", triggerSidebarAutoHide);
+  // sidebar.addEventListener("mouseleave", triggerSidebarAutoHide);
 
   // Switch View Section Function
   window.switchView = function (targetViewId) {
@@ -3270,58 +3270,54 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  // 0..1 position of the train inside one panel
-  const tjFrac = (panel, p) =>
-    Math.min(1, Math.max(0, (p - panel.from) / (panel.to - panel.from)));
-  // the train pin shows in the panel the train is in (it waits at the end of Onward while travelling Ayodhya -> Varanasi)
-  const tjPinVisible = (panel, p) => (panel.from === 0 ? p < 6 : p >= 6);
+  // ONE continuous rail through all 8 stops (Onward + Return), every stop gets an equal part of it
+  const TJ_STOPS = 8;
+  // 0..1 position of the train from the first stop to the last
+  const tjFrac = (p) => Math.min(1, Math.max(0, p / (TJ_STOPS - 1)));
+  // left edge (in %) of the train pin for a position 0..1 on the rail
+  const tjPinLeft = (f) => 50 / TJ_STOPS + (100 - 100 / TJ_STOPS) * f + "%";
 
   function tjStopHtml(m, i, n) {
     const leg = i === 0 ? m.legs[0] : m.legs[i - 1];
     const when = i === 0 ? leg.dep : leg.arr;
     const clock = i === 0 ? `Dep ${leg.depTxt}` : `Arr ${leg.arrTxt}`;
-    const ret = i === 6 ? " <small>(Return)</small>" : "";
+    const ret = i === 6 ? " <br> <small>(Return)</small>" : "";
     return `<div class="tj-stop ${stopState(i, m.p)}${i === 0 ? " is-first" : ""}">
         <span class="tj-dot"></span>
-        <span class="tj-city">${TIMELINE_NAMES[i]}${ret}</span>
-        <span class="tj-station"><i class="fa-solid fa-location-dot"></i> ${TIMELINE_NAMES[i]}${ret}</span>
+        <span class="tj-city"><i class="fa-solid fa-location-dot"></i> ${TIMELINE_NAMES[i]}${ret}</span>
         <span class="tj-date">${dateOf(when)}</span>
         <span class="tj-time">${clock}</span>
       </div>`;
   }
 
-  function tjPanelHtml(panel, m) {
-    const n = panel.to - panel.from + 1;
-    let stops = "";
-    for (let i = panel.from; i <= panel.to; i++) stops += tjStopHtml(m, i, n);
-    return `<section class="tj-panel ${panel.cls}" data-from="${panel.from}" data-to="${panel.to}" style="--n:${n}">
+  // panel = just the coloured heading (Onward / Return); the rail itself is shared, see tjTrackHtml
+  function tjPanelHtml(panel) {
+    return `<section class="tj-panel ${panel.cls}" data-from="${panel.from}" data-to="${panel.to}">
       <header class="tj-panel-head">
         <span class="tj-panel-icon"><i class="fa-solid fa-train-subway"></i></span>
         <div><h4>${panel.title}</h4><p>${panel.sub}</p></div>
       </header>
-      <div class="tj-scroll"><div class="tj-track">
+    </section>`;
+  }
+
+  // the single continuous track: rail + progress fill + train pin + all 8 stops in equal columns
+  function tjTrackHtml(m) {
+    let stops = "";
+    for (let i = 0; i < TJ_STOPS; i++) stops += tjStopHtml(m, i, TJ_STOPS);
+    return `<div class="tj-scroll"><div class="tj-track">
         <div class="tj-rail"><div class="tj-fill"></div></div>
         <div class="tj-pin"><i class="fa-solid fa-train-subway"></i></div>
         ${stops}
-      </div></div>
-    </section>`;
+      </div></div>`;
   }
 
   // move the fill + train pin of one timeline to the current position
   function tjPlace(tl, m) {
-    TJ_PANELS.forEach((panel) => {
-      const box = $(`.${panel.cls}`, tl);
-      if (!box) return;
-      const n = panel.to - panel.from + 1;
-      const f = tjFrac(panel, m.p);
-      const fill = $(".tj-fill", box),
-        pin = $(".tj-pin", box);
-      if (fill) fill.style.width = f * 100 + "%";
-      if (pin) {
-        pin.style.left = 50 / n + (100 - 100 / n) * f + "%";
-        pin.style.display = tjPinVisible(panel, m.p) ? "" : "none";
-      }
-    });
+    const f = tjFrac(m.p);
+    const fill = $(".tj-fill", tl),
+      pin = $(".tj-pin", tl);
+    if (fill) fill.style.width = f * 100 + "%";
+    if (pin) pin.style.left = tjPinLeft(f);
   }
 
   function applyTimeline(start) {
@@ -3340,17 +3336,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="tj-status"><i class="fa-regular fa-calendar-days"></i><span class="tj-status-text">${timelineStatusHtml(start, m)}</span></div>
         </div>
-        <div class="tj-card">${TJ_PANELS.map((pn) => tjPanelHtml(pn, m)).join("")}</div>
+        <div class="tj-card" style="--n:${TJ_STOPS}">${TJ_PANELS.map((pn) => tjPanelHtml(pn)).join("")}${tjTrackHtml(m)}</div>
       </div>`,
       );
       const tl = header.nextElementSibling;
       // start the train at the beginning, then slide it to its scheduled position
-      TJ_PANELS.forEach((pn) => {
-        const box = $(`.${pn.cls}`, tl),
-          n = pn.to - pn.from + 1;
-        const pin = box && $(".tj-pin", box);
-        if (pin) pin.style.left = 50 / n + "%";
-      });
+      const pin0 = $(".tj-pin", tl);
+      if (pin0) pin0.style.left = tjPinLeft(0);
       setTimeout(() => tjPlace(tl, m), 80);
     });
   }
@@ -3362,11 +3354,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const st = $(".tj-status-text", tl);
       if (st) st.innerHTML = timelineStatusHtml(start, m);
       tjPlace(tl, m);
-      $$(".tj-stop", tl).forEach((el) => {
-        const panel = el.closest(".tj-panel");
-        const idx =
-          +panel.dataset.from +
-          Array.prototype.indexOf.call($$(".tj-stop", panel), el);
+      $$(".tj-stop", tl).forEach((el, idx) => {
         el.classList.remove("done", "current", "todo");
         el.classList.add(stopState(idx, m.p));
       });
@@ -3826,6 +3814,25 @@ document.addEventListener("DOMContentLoaded", () => {
       e.stopPropagation();
       if (pop.classList.contains("open")) closeCal();
       else openCal();
+    });
+
+    // Clicking / tapping ANYWHERE on the date field (dd / mm / yyyy) opens the calendar.
+    // The boxes are read-only so no keyboard pops up; the calendar is how a date is chosen.
+    [dIn, mIn, yIn].forEach((box) => {
+      box.readOnly = true;
+      box.setAttribute("inputmode", "none");
+      box.addEventListener("keydown", (e) => {
+        // keyboard users: Enter / Space / Arrow-down open the calendar
+        if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+          e.preventDefault();
+          if (!pop.classList.contains("open")) openCal();
+        }
+      });
+    });
+    wrap.addEventListener("click", (e) => {
+      if (calBtn.contains(e.target)) return; // the calendar button keeps its own toggle
+      e.stopPropagation();
+      if (!pop.classList.contains("open")) openCal();
     });
 
     pop.addEventListener("click", (e) => {

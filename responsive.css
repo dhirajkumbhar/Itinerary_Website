@@ -633,14 +633,6 @@ a:focus-visible,
     padding: 3em 16px;
   }
 
-  .sidebar-header::before {
-    content: "";
-    height: 2px;
-    /* Thickness of the line */
-    background-color: #333;
-    /* Color of the line */
-  }
-
   /* closed (default) — every state, hover included, stays off-screen */
   .sidebar,
   .sidebar.collapsed,
@@ -1706,26 +1698,14 @@ a:focus-visible,
   .tj-card {
     --tjgap: clamp(8px, 1.6vw, 14px);
     --tjpad: clamp(8px, 1.8vw, 16px);
-    --col: calc((100cqw - var(--tjgap)) / 8.6 - 4px);
+    --col: calc(100cqw / 8 - 2px);
     /* width of one stop column */
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: var(--tjgap);
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    /* Onward | Return share the same two rows -> always aligned */
+    column-gap: 0;
+    row-gap: 0;
     padding: var(--tjpad);
     border-radius: clamp(14px, 3vw, 18px);
-  }
-
-  .tj-onward {
-    flex: 6 1 0;
-    width: auto;
-    min-width: 0;
-  }
-
-  .tj-return {
-    flex: 2.6 1 0;
-    width: auto;
-    min-width: 0;
   }
 
   .tj-panel {
@@ -1757,7 +1737,7 @@ a:focus-visible,
 
   /* ---- the rails: fit their panel exactly ---- */
   .tj-scroll {
-    padding: 2px 2px clamp(10px, calc(var(--col) * 0.2), 20px);
+    padding: 2px 0 clamp(10px, calc(var(--col) * 0.2), 20px);
     overflow: hidden;
   }
 

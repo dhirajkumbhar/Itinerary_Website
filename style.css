@@ -229,7 +229,7 @@ h4 {
 
 /* CONTAINER */
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -7275,9 +7275,12 @@ button:focus-visible,
 }
 
 .tj-card {
-  display: flex;
-  align-items: stretch;
-  gap: 22px;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  /* 8 stops = 8 equal parts (Onward 6 + Return 2) */
+  grid-template-rows: auto 1fr;
+  column-gap: 0;
+  row-gap: 0;
   padding: 22px;
   border-radius: 18px;
   background: linear-gradient(135deg, #ffffff 0%, #faf7ff 100%);
@@ -7293,14 +7296,40 @@ button:focus-visible,
   border: 1px solid var(--border-glass);
   background: rgba(255, 255, 255, 0.75);
   overflow: hidden;
+  /* Onward + Return take the SAME two rows (header, track):
+     headers get equal height and both rails sit on one line */
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / span 2;
 }
 
 .tj-onward {
-  flex: 6 1 0;
+  grid-column: 1 / span 6;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
 }
 
 .tj-return {
-  flex: 2.4 1 0;
+  grid-column: 7 / span 2;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}
+
+.tj-panel-head {
+  align-self: stretch;
+}
+
+@supports not (grid-template-rows: subgrid) {
+  .tj-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tj-panel-head {
+    min-height: 96px;
+  }
 }
 
 .tj-panel-head {
@@ -7313,6 +7342,7 @@ button:focus-visible,
 
 .tj-return .tj-panel-head {
   background: linear-gradient(135deg, rgba(150, 47, 191, 0.12) 0%, rgba(214, 41, 118, 0.10) 100%);
+  border-left: 1px solid var(--border-glass);
 }
 
 .tj-panel-icon {
@@ -7349,10 +7379,13 @@ button:focus-visible,
 }
 
 .tj-scroll {
-  padding: 6px 12px 22px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  /* one continuous track laid over BOTH panels (row 2, all 8 columns) */
+  grid-column: 1 / -1;
+  grid-row: 2;
+  position: relative;
+  z-index: 2;
+  padding: 6px 0 22px;
+  overflow: visible;
 }
 
 /* one column per stop; the rail runs from the first to the last column centre */
@@ -7364,7 +7397,7 @@ button:focus-visible,
   display: grid;
   grid-template-columns: repeat(var(--n), minmax(0, 1fr));
   padding-top: calc(var(--pin) + 12px);
-  min-width: calc(var(--n) * 84px);
+  min-width: 0;
 }
 
 .tj-rail {
@@ -7466,7 +7499,7 @@ button:focus-visible,
 
 .tj-city {
   margin-top: 14px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--text-heading);
   line-height: 1.2;
@@ -7491,9 +7524,9 @@ button:focus-visible,
   max-width: 100%;
 }
 
-.tj-station i {
+.tj-city i {
   color: var(--primary-saffron);
-  font-size: 13px;
+  font-size: 18px;
 }
 
 .tj-station small {
@@ -7512,7 +7545,7 @@ button:focus-visible,
   padding: 7px 14px;
   border-radius: 9px;
   max-width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: #15803d;
   background: rgba(21, 128, 61, 0.10);
@@ -7570,4 +7603,35 @@ button:focus-visible,
   .tj-stop.current .tj-dot {
     animation: none;
   }
+}
+
+/* small accent line under the sidebar header — visible on every device */
+.sidebar-header {
+  position: relative;
+}
+
+.sidebar-header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: min(56%, 120px);
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: linear-gradient(90deg, #fa7e1e, #d62976, #962fbf);
+  box-shadow: 0 0 10px rgba(214, 41, 118, 0.45);
+  pointer-events: none;
+}
+
+/* date field: the whole field opens the calendar (no manual typing) */
+.dmy,
+.dmy .dmy-in {
+  cursor: pointer;
+}
+
+.trip-date-picker .dmy-in {
+  caret-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
